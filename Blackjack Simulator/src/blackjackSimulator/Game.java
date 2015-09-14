@@ -7,7 +7,7 @@ public class Game {
 	public Game() {	
 	}
 	
-	public void PlayDealerHand  ( Deck deck ) throws OutOfCards {
+	public int PlayDealerHand  ( Deck deck ) throws OutOfCards {
 		
 		Hand hand;
 		hand = new Hand();
@@ -56,6 +56,30 @@ public class Game {
 			
 			System.out.println("hand value is "+hand.HandValue() );
 		}
+		
+		if ( hand.HandValue() < 21 ) return hand.HandValue();
+		
+		if ( hand.HandValue() > 21 ) {
+			
+			while ( hand.AltHandValue() < 17 ) {
+				
+				/* draw another card */
+				
+				try
+		        {
+					hand.AddCardToHand ( deck.Draw() );
+					hand.PrintHand();
+		        }
+		        catch ( OutOfCards ooc )
+		        {
+		            throw new OutOfCards();
+		        }
+				
+				System.out.println("hand value is "+hand.AltHandValue() );
+			}
+		}
+		
+		return ( hand.AltHandValue() );
 		
 	}
 }

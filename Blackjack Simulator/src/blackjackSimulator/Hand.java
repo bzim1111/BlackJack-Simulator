@@ -24,6 +24,22 @@ public class Hand {
 	}
 	
 	
+	public int AltHandValue() {
+		int ac;
+		int count;
+		
+		count = this.HandValue();
+		ac = this.CountAces();
+		
+		while ( ac > 0 ) {
+			if ( count > 21 ) count = count - 10;
+			ac--;
+		}
+		
+		return ( count );
+	}
+	
+	
 	public void AddCardToHand ( Card c ) {
 		hand[num_cards++] = c;
 	}
@@ -39,6 +55,19 @@ public class Hand {
 	}
 	
 	
+	public int CountAces() {
+		int i;
+		int ac;
+		
+		ac = 0;
+		for ( i=0; i<num_cards; i++ ) {
+			if ( hand[i].card_value == 11 ) ac++;
+		}
+		
+		return ( ac );
+	}
+	
+	
 	public void PrintHand() {
 		int i;
 		
@@ -46,7 +75,10 @@ public class Hand {
 		for ( i=0; i<num_cards; i++ ) {
 			hand[i].PrintCard();
 		}
+		System.out.println("value = "+this.HandValue());
+		System.out.println("alt value = "+this.AltHandValue());
 		System.out.println("has ace = "+this.HasAce());
+		System.out.println("ace count = "+this.CountAces());
 		System.out.println("-------------------");
 	}
 	

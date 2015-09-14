@@ -6,6 +6,7 @@ public class BlackjackSimulator {
 	public static void main(String[] args) {
 		
 		int i;
+		int dealer_count;
 		
 		Deck deck = new Deck();
 		
@@ -33,14 +34,17 @@ public class BlackjackSimulator {
 		
 		Game game = new Game();
 		
+		dealer_count = 0;
 		try
         {
-			game.PlayDealerHand ( deck );
+			dealer_count = game.PlayDealerHand ( deck );
         }
         catch ( OutOfCards ooc )
         {
             System.out.println("out of cards");
         }
+		
+		System.out.println("FINAL DEALER COUNT = "+dealer_count);
 		
 	}
 
