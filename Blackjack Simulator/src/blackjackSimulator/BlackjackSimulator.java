@@ -24,7 +24,23 @@ public class BlackjackSimulator {
 	            System.out.println("out of cards");
 	            break;
 	        }
-		}	
+		}
+		
+		/* play dealer hand */
+		
+		deck.ShuffleDeck();
+		
+		Game game = new Game();
+		
+		try
+        {
+			game.PlayDealerHand ( deck );
+        }
+        catch ( OutOfCards ooc )
+        {
+            System.out.println("out of cards");
+        }
+		
 	}
 
 }
