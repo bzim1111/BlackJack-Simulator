@@ -28,7 +28,8 @@ public class BlackjackSimulator {
 		
 		/* play dealer hand */
 		
-		deck.ShuffleDeck();
+		/*deck.ShuffleDeck();*/
+		deck.ResetDeck();
 		
 		Game game = new Game();
 		

@@ -101,4 +101,8 @@ public class Deck {
 	}
 
 	
+	public void ResetDeck() {
+		current_card = 0;
+	}
+	
 }
