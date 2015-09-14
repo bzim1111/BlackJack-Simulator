@@ -1,8 +1,14 @@
 package blackjackSimulator;
 
-/* need to add a class for Hand */
-
 public class Game {
+	
+	
+	String[][] player_hard = new String[][] {
+	/* dealer up        2     3     4     5     6     7     8     9     10     11 */
+	/* player  2 */  { "s",  "s",  "s" },
+	/*         3 */  { "s",  "s",  "s" }
+	};
+	
 	
 	public Game() {	
 	}
