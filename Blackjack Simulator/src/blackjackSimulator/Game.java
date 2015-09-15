@@ -4,12 +4,8 @@ public class Game {
 	
 	/*
 	 * need to implement
-	 * doubling
-	 * surrender
-	 * 1.5 payout for blackjack
 	 * soft hands
 	 * splitting
-	 * bankroll
 	 */
 	
 	/*
@@ -60,10 +56,8 @@ public class Game {
 	 * Player play
 	 */
 	
-	public int PlayPlayerHand ( Deck deck , Card dealer_upcard , Bet bet ) throws OutOfCards {
+	public int PlayPlayerHand ( Deck deck , Card dealer_upcard , Bet bet , Hand hand ) throws OutOfCards {
 		
-		Hand hand;
-		hand = new Hand();
 		boolean done , surrender;
 		
 		if (debug) System.out.println("");

@@ -29,12 +29,12 @@ public class BlackjackSimulator {
 		
 
 		Deck deck = new Deck();
+		deck.ShuffleDeck();
 		
 		for ( j=1; j<=num_iterations; j++ ) {
-			
-			deck.ShuffleDeck();
 		
 			Game game = new Game();
+			Hand player_hand = new Hand();
 		
 			/* Draw first card for Dealer (down card) */
 		
@@ -71,7 +71,7 @@ public class BlackjackSimulator {
 		
 			try
 			{
-				player_count = game.PlayPlayerHand(deck, dealer_second, player_bet );
+				player_count = game.PlayPlayerHand ( deck , dealer_second , player_bet , player_hand );
 			}
 			catch ( OutOfCards ooc )
 			{
@@ -111,6 +111,7 @@ public class BlackjackSimulator {
 				if ( dealer_count > 21 ) {
 					if (debug) System.out.println("PLAYER WINS");
 					player_wins++;
+					if (( player_count == 21 ) && ( player_hand.NumCards() == 2 )) player_bet.BJWinBet();
 					bankroll = bankroll + player_bet.BetAmount();
 				}
 				else {
@@ -127,6 +128,7 @@ public class BlackjackSimulator {
 						else {
 							if (debug) System.out.println("PLAYER WINS");
 							player_wins++;
+							if (( player_count == 21 ) && ( player_hand.NumCards() == 2 )) player_bet.BJWinBet();
 							bankroll = bankroll + player_bet.BetAmount();
 						}
 					}

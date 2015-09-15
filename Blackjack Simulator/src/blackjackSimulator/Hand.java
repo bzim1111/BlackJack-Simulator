@@ -68,6 +68,11 @@ public class Hand {
 	}
 	
 	
+	public int NumCards() {
+		return ( num_cards );
+	}
+	
+	
 	public void PrintHand() {
 		int i;
 		
