@@ -64,7 +64,7 @@ public class Game {
 		
 		Hand hand;
 		hand = new Hand();
-		boolean done;
+		boolean done , surrender;
 		
 		if (debug) System.out.println("");
 		if (debug) System.out.println("Playing Player Hand");
@@ -95,6 +95,7 @@ public class Game {
 		
 		if (debug) System.out.println("player hand value is "+hand.HandValue() );	
 		
+		surrender = false;
 		done = false;
 		
 		while ( ( ! done ) && (hand.HandValue() <= 21 ) ) {
@@ -145,11 +146,14 @@ public class Game {
 					bet.HalveBet();
 					if (debug) System.out.println("player surrenders");
 					done = true;
+					surrender = true;
 					break;
 			}
 		}
 		
 		if (debug) System.out.println("player hand value is "+hand.HandValue());
+		
+		if ( surrender ) return ( 22 ); /* make sure player loses */
 		
 		return ( hand.HandValue() );
 	}

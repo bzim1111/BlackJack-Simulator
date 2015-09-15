@@ -79,6 +79,7 @@ public class BlackjackSimulator {
 			}
 		
 			if (debug) System.out.println("FINAL PLAYER COUNT = "+player_count);
+			if (debug) System.out.println("FINAL PLAYER BET = "+df.format(player_bet.BetAmount()));
 	
 		
 			/* play the Dealer's hand, if the Player didn't bust */
