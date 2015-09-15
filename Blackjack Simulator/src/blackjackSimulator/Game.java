@@ -2,41 +2,69 @@ package blackjackSimulator;
 
 public class Game {
 	
+	/*
+	 * need to implement
+	 * doubling
+	 * surrender
+	 * 1.5 payout for blackjack
+	 * soft hands
+	 * splitting
+	 * statistics
+	 */
+	
+	/*
+	 * Strategy matrices for the Player.
+	 * 
+	 * s = stand
+	 * h = hit
+	 * ds = double if possible, if not stand
+	 * dh = double if possible, if not hit
+	 * sp = split
+	 * su = surrender
+	 * 
+	 */
+	
 	
 	String[][] player_hard = new String[][] {
-	/* dealer up        2     3     4     5     6     7     8     9    10   11 */
-	/* player  2 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*         3 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*         4 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*         5 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*         6 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*         7 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*         8 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*         9 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*        10 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*        11 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*        12 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*        13 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*        14 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*        15 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*        16 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*        17 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*        18 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*        19 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*        20 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" },
-	/*        21 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s", "s" }
+	/* dealer up        2     3     4     5     6     7     8     9    10    11 */
+	/* player  2 */  { "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h" },
+	/*         3 */  { "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h" },
+	/*         4 */  { "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h" },
+	/*         5 */  { "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h" },
+	/*         6 */  { "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h" },
+	/*         7 */  { "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h" },
+	/*         8 */  { "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h" },
+	/*         9 */  { "h",  "dh", "dh", "dh", "dh", "h",  "h",  "h",  "h",  "h" },
+	/*        10 */  { "dh", "dh", "dh", "dh", "dh", "dh", "dh", "dh", "h",  "h" },
+	/*        11 */  { "dh", "dh", "dh", "dh", "dh", "dh", "dh", "dh", "dh", "h" },
+	/*        12 */  { "h",  "h",  "s",  "s",  "s",  "h",  "h",  "h",  "h",  "h" },
+	/*        13 */  { "s",  "s",  "s",  "s",  "s",  "h",  "h",  "h",  "h",  "h" },
+	/*        14 */  { "s",  "s",  "s",  "s",  "s",  "h",  "h",  "h",  "h",  "h" },
+	/*        15 */  { "s",  "s",  "s",  "s",  "s",  "h",  "h",  "h",  "su", "h" },
+	/*        16 */  { "s",  "s",  "s",  "s",  "s",  "h",  "h",  "su", "su", "su"},
+	/*        17 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
+	/*        18 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
+	/*        19 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
+	/*        20 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
+	/*        21 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" }
 	};
 	
 	
 	public Game() {	
 	}
 	
-	public int PlayDealerHand  ( Deck deck ) throws OutOfCards {
+	
+	/*
+	 * Player play
+	 */
+	
+	public int PlayPlayerHand ( Deck deck , Card dealer_upcard ) throws OutOfCards {
 		
 		Hand hand;
 		hand = new Hand();
+		boolean done;
 		
-		System.out.println("Playing Dealer Hand");
+		System.out.println("Playing Player Hand");
 		
 		/* draw first card */
 		
@@ -62,7 +90,66 @@ public class Game {
             throw new OutOfCards();
         }
 		
-		System.out.println("hand value is "+hand.HandValue() );
+		System.out.println("player hand value is "+hand.HandValue() );	
+		
+		done = false;
+		
+		while ( ( ! done ) && (hand.HandValue() <= 21 ) ) {
+			
+			switch ( player_hard[hand.HandValue()-2][dealer_upcard.card_value-2]) {
+			
+				case "s":
+				case "ds":
+					System.out.println("player stays");
+					done = true;
+					break;
+					
+				case "h":
+				case "dh":
+					System.out.println("player hits");
+					try
+			        {
+						hand.AddCardToHand ( deck.Draw() );
+						hand.PrintHand();
+			        }
+			        catch ( OutOfCards ooc )
+			        {
+			            throw new OutOfCards();
+			        }
+					break;
+					
+				case "su":
+					System.out.println("player surrenders");
+					done = true;
+					break;
+			}
+		}
+		
+		System.out.println("player hand value is "+hand.HandValue());
+		
+		return ( hand.HandValue() );
+	}
+	
+	
+	/*
+	 * Dealer play
+	 */
+	
+	public int PlayDealerHand  ( Deck deck , Card first_card , Card second_card ) throws OutOfCards {
+		
+		Hand hand;
+		hand = new Hand();
+		
+		System.out.println("Playing Dealer Hand");
+		
+		/* add first and second cards to hand */
+		
+		hand.AddCardToHand ( first_card );
+		hand.AddCardToHand ( second_card );
+		
+		System.out.println("dealer hand value is "+hand.HandValue() );
+		
+		/* dealer hits until hand value is 17+ */
 		
 		while ( hand.HandValue() < 17 ) {
 			
@@ -78,12 +165,18 @@ public class Game {
 	            throw new OutOfCards();
 	        }
 			
-			System.out.println("hand value is "+hand.HandValue() );
+			System.out.println("dealer hand value is "+hand.HandValue() );
 		}
+		
+		/* Dealer is between 17 and 21 - return that hand value */
 		
 		if ( hand.HandValue() < 21 ) return hand.HandValue();
 		
+		/* Dealer is > 21, check for aces (soft hand) */
+		
 		if ( hand.HandValue() > 21 ) {
+			
+			/* check the soft (Alternate) hand value, hit 16 and below */
 			
 			while ( hand.AltHandValue() < 17 ) {
 				
@@ -99,9 +192,11 @@ public class Game {
 		            throw new OutOfCards();
 		        }
 				
-				System.out.println("hand value is "+hand.AltHandValue() );
+				System.out.println("dealer hand value is "+hand.AltHandValue() );
 			}
 		}
+		
+		/* now we are done checking soft hand, return whatever the final value is */
 		
 		return ( hand.AltHandValue() );
 		
