@@ -56,7 +56,7 @@ public class Game {
 	 * Player play
 	 */
 	
-	public int PlayPlayerHand ( Deck deck , Card dealer_upcard , Bet bet , Hand hand ) throws OutOfCards {
+	public int PlayPlayerHand ( Deck deck , Card dealer_upcard , Bet bet , Hand hand , boolean dealer_bj ) throws OutOfCards {
 		
 		boolean done , surrender;
 		
@@ -137,7 +137,7 @@ public class Game {
 					break;
 					
 				case "su":
-					bet.HalveBet();
+					if ( ! dealer_bj) bet.HalveBet();  /* can't surrender if dealer has blackjack */
 					if (debug) System.out.println("player surrenders");
 					done = true;
 					surrender = true;
@@ -147,7 +147,11 @@ public class Game {
 		
 		if (debug) System.out.println("player hand value is "+hand.HandValue());
 		
-		if ( surrender ) return ( 22 ); /* make sure player loses */
+		/* make sure player loses if surrendered - note - didn't surrender if dealer had blackjack */
+		
+		if ( surrender && (! dealer_bj) ) return ( 22 );
+		
+		/* return the final hand value */
 		
 		return ( hand.HandValue() );
 	}

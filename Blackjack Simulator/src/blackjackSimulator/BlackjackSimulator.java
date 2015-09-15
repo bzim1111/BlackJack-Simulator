@@ -13,7 +13,7 @@ public class BlackjackSimulator {
 		int num_iterations, shuffle_point;
 		int dealer_wins, player_wins, pushes;
 		float dealer_pct, player_pct;
-		boolean debug;
+		boolean debug, dealer_has_bj;
 		double bankroll, pct_per_hand;
 		DecimalFormat df = new DecimalFormat("0.0");
 		
@@ -63,6 +63,10 @@ public class BlackjackSimulator {
 			if (debug) System.out.println("initial dealer cards");
 			if (debug) dealer_first.PrintCard();
 			if (debug) dealer_second.PrintCard();
+			
+			/* check Dealer's hand for blackjack */
+			dealer_has_bj = false;
+			if ( (dealer_first.card_value + dealer_second.card_value) == 21 ) dealer_has_bj = true;
 		
 			/* play the Player's hand */
 		
@@ -71,7 +75,7 @@ public class BlackjackSimulator {
 		
 			try
 			{
-				player_count = game.PlayPlayerHand ( deck , dealer_second , player_bet , player_hand );
+				player_count = game.PlayPlayerHand ( deck , dealer_second , player_bet , player_hand , dealer_has_bj );
 			}
 			catch ( OutOfCards ooc )
 			{
