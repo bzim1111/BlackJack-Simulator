@@ -49,6 +49,8 @@ public class Game {
 	/*        21 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" }
 	};
 	
+	boolean debug = false;
+	
 	
 	public Game() {	
 	}
@@ -64,14 +66,15 @@ public class Game {
 		hand = new Hand();
 		boolean done;
 		
-		System.out.println("Playing Player Hand");
+		if (debug) System.out.println("");
+		if (debug) System.out.println("Playing Player Hand");
 		
 		/* draw first card */
 		
 		try
         {
 		   hand.AddCardToHand ( deck.Draw() );
-		   hand.PrintHand();
+		   if (debug) hand.PrintHand();
         }
         catch ( OutOfCards ooc )
         {
@@ -83,14 +86,14 @@ public class Game {
 		try
         {
 			hand.AddCardToHand ( deck.Draw() );
-			hand.PrintHand();
+			if (debug) hand.PrintHand();
         }
         catch ( OutOfCards ooc )
         {
             throw new OutOfCards();
         }
 		
-		System.out.println("player hand value is "+hand.HandValue() );	
+		if (debug) System.out.println("player hand value is "+hand.HandValue() );	
 		
 		done = false;
 		
@@ -100,17 +103,17 @@ public class Game {
 			
 				case "s":
 				case "ds":
-					System.out.println("player stays");
+					if (debug) System.out.println("player stays");
 					done = true;
 					break;
 					
 				case "h":
 				case "dh":
-					System.out.println("player hits");
+					if (debug) System.out.println("player hits");
 					try
 			        {
 						hand.AddCardToHand ( deck.Draw() );
-						hand.PrintHand();
+						if (debug) hand.PrintHand();
 			        }
 			        catch ( OutOfCards ooc )
 			        {
@@ -119,13 +122,13 @@ public class Game {
 					break;
 					
 				case "su":
-					System.out.println("player surrenders");
+					if (debug) System.out.println("player surrenders");
 					done = true;
 					break;
 			}
 		}
 		
-		System.out.println("player hand value is "+hand.HandValue());
+		if (debug) System.out.println("player hand value is "+hand.HandValue());
 		
 		return ( hand.HandValue() );
 	}
@@ -140,14 +143,15 @@ public class Game {
 		Hand hand;
 		hand = new Hand();
 		
-		System.out.println("Playing Dealer Hand");
+		if (debug) System.out.println("");
+		if (debug) System.out.println("Playing Dealer Hand");
 		
 		/* add first and second cards to hand */
 		
 		hand.AddCardToHand ( first_card );
 		hand.AddCardToHand ( second_card );
 		
-		System.out.println("dealer hand value is "+hand.HandValue() );
+		if (debug) System.out.println("dealer hand value is "+hand.HandValue() );
 		
 		/* dealer hits until hand value is 17+ */
 		
@@ -158,14 +162,14 @@ public class Game {
 			try
 	        {
 				hand.AddCardToHand ( deck.Draw() );
-				hand.PrintHand();
+				if (debug) hand.PrintHand();
 	        }
 	        catch ( OutOfCards ooc )
 	        {
 	            throw new OutOfCards();
 	        }
 			
-			System.out.println("dealer hand value is "+hand.HandValue() );
+			if (debug) System.out.println("dealer hand value is "+hand.HandValue() );
 		}
 		
 		/* Dealer is between 17 and 21 - return that hand value */
@@ -185,14 +189,14 @@ public class Game {
 				try
 		        {
 					hand.AddCardToHand ( deck.Draw() );
-					hand.PrintHand();
+					if (debug) hand.PrintHand();
 		        }
 		        catch ( OutOfCards ooc )
 		        {
 		            throw new OutOfCards();
 		        }
 				
-				System.out.println("dealer hand value is "+hand.AltHandValue() );
+				if (debug) System.out.println("dealer hand value is "+hand.AltHandValue() );
 			}
 		}
 		
