@@ -1,11 +1,12 @@
 package blackjackSimulator;
 
+import java.text.DecimalFormat;
+
 public class BlackjackSimulator {
 
 	
 	public static void main(String[] args) {
 		
-		int i;
 		int dealer_count , player_count;
 		Card dealer_first , dealer_second;
 		int j;
@@ -13,15 +14,18 @@ public class BlackjackSimulator {
 		int dealer_wins, player_wins, pushes;
 		float dealer_pct, player_pct;
 		boolean debug;
+		double bankroll, pct_per_hand;
+		DecimalFormat df = new DecimalFormat("0.0");
 		
 		debug = false;
 		
-		num_iterations = 100000;
+		num_iterations = 1000000;
 		shuffle_point  = 20;
 		
 		dealer_wins = 0;
 		player_wins = 0;
 		pushes = 0;
+		bankroll = 0.0;
 		
 
 		Deck deck = new Deck();
@@ -63,10 +67,11 @@ public class BlackjackSimulator {
 			/* play the Player's hand */
 		
 			player_count = 0;
+			Bet player_bet = new Bet();
 		
 			try
 			{
-				player_count = game.PlayPlayerHand(deck, dealer_second );
+				player_count = game.PlayPlayerHand(deck, dealer_second, player_bet );
 			}
 			catch ( OutOfCards ooc )
 			{
@@ -99,11 +104,13 @@ public class BlackjackSimulator {
 			if ( player_count > 21 ) {
 				if (debug) System.out.println("DEALER WINS");
 				dealer_wins++;
+				bankroll = bankroll - player_bet.BetAmount();
 			}
 			else {
 				if ( dealer_count > 21 ) {
 					if (debug) System.out.println("PLAYER WINS");
 					player_wins++;
+					bankroll = bankroll + player_bet.BetAmount();
 				}
 				else {
 					if ( dealer_count == player_count ) {
@@ -114,10 +121,12 @@ public class BlackjackSimulator {
 						if ( dealer_count > player_count ) {
 							if (debug) System.out.println("DEALER WINS");
 							dealer_wins++;
+							bankroll = bankroll - player_bet.BetAmount();
 						}
 						else {
 							if (debug) System.out.println("PLAYER WINS");
 							player_wins++;
+							bankroll = bankroll + player_bet.BetAmount();
 						}
 					}
 				}
@@ -127,17 +136,20 @@ public class BlackjackSimulator {
 			
 		} /* end of game iteration */
 		
-		/* generate and print statistics */
+		/* generate statistics */
 		
-		player_pct = 100*( ((float) player_wins) / ((float) (player_wins+dealer_wins)) );
-		dealer_pct = 100*( ((float) dealer_wins) / ((float) (player_wins+dealer_wins)) );
+		player_pct   = 100*( ((float) player_wins) / ((float) (player_wins+dealer_wins)) );
+		dealer_pct   = 100*( ((float) dealer_wins) / ((float) (player_wins+dealer_wins)) );		
+		pct_per_hand = 100*(bankroll / ((double) num_iterations) );
 		
-		player_pct = Math.round(player_pct*10)/10;
-		dealer_pct = Math.round(dealer_pct*10)/10;
+		/* print statistics */
 		
 		System.out.println("");
-		System.out.println("PLAYER WINS "+player_wins+" "+player_pct+"%");
-		System.out.println("DEALER WINS "+dealer_wins+" "+dealer_pct+"%");
+		System.out.println("PLAYER WINS "+player_wins+" "+df.format(player_pct)+"%");
+		System.out.println("DEALER WINS "+dealer_wins+" "+df.format(dealer_pct)+"%");
 		System.out.println("PUSHES      "+pushes);
+		System.out.println("");
+		System.out.println("BANKROLL    "+bankroll);
+		System.out.println("%/HAND      "+df.format(pct_per_hand)+"%");
 	}
 }

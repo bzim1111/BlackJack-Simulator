@@ -9,7 +9,7 @@ public class Game {
 	 * 1.5 payout for blackjack
 	 * soft hands
 	 * splitting
-	 * statistics
+	 * bankroll
 	 */
 	
 	/*
@@ -60,7 +60,7 @@ public class Game {
 	 * Player play
 	 */
 	
-	public int PlayPlayerHand ( Deck deck , Card dealer_upcard ) throws OutOfCards {
+	public int PlayPlayerHand ( Deck deck , Card dealer_upcard , Bet bet ) throws OutOfCards {
 		
 		Hand hand;
 		hand = new Hand();
@@ -102,14 +102,34 @@ public class Game {
 			switch ( player_hard[hand.HandValue()-2][dealer_upcard.card_value-2]) {
 			
 				case "s":
-				case "ds":
 					if (debug) System.out.println("player stays");
+					done = true;
+					break;
+
+				case "ds":
+					bet.DoubleBet();
+					done = true;
+					if (debug) System.out.println("player doubles and stays");
 					done = true;
 					break;
 					
 				case "h":
-				case "dh":
 					if (debug) System.out.println("player hits");
+					try
+			        {
+						hand.AddCardToHand ( deck.Draw() );
+						if (debug) hand.PrintHand();
+			        }
+			        catch ( OutOfCards ooc )
+			        {
+			            throw new OutOfCards();
+			        }
+					break;
+
+				case "dh":
+					bet.DoubleBet();
+					done = true;
+					if (debug) System.out.println("player doubles and hits");
 					try
 			        {
 						hand.AddCardToHand ( deck.Draw() );
@@ -122,6 +142,7 @@ public class Game {
 					break;
 					
 				case "su":
+					bet.HalveBet();
 					if (debug) System.out.println("player surrenders");
 					done = true;
 					break;
