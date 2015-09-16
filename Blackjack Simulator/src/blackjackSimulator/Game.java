@@ -5,6 +5,7 @@ public class Game {
 	/*
 	 * need to implement
 	 * splitting
+	 * multiple decks
 	 */
 	
 	/*
