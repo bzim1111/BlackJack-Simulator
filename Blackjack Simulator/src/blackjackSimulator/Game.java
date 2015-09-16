@@ -96,7 +96,8 @@ public class Game {
 	/*        21 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" }
 	};
 
-	boolean debug = false;
+	
+	boolean debug = true;
 	
 	
 	public Game() {	
@@ -361,7 +362,8 @@ public class Game {
 	
 	public boolean CheckForSplit ( Card card1 , Card card2 , Card dealer_upcard ) {
 		
-		/* if ( player_pair[card1.card_value-2][dealer_upcard.card_value-2] == "sp" ) return true; */
+		if ( ( card1.card_face_value == card2.card_face_value ) && 
+		     ( player_pair[card1.card_value-2][dealer_upcard.card_value-2] == "sp" ) ) return true;
 		
 		return ( false );
 	}

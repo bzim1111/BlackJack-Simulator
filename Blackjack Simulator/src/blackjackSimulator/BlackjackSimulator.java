@@ -20,9 +20,9 @@ public class BlackjackSimulator {
 		Hand player_hand, split_hand;
 		Game game , split_game;
 		
-		debug = false;
+		debug = true;
 		
-		num_iterations = 1000000;
+		num_iterations = 1;
 		shuffle_point  = 20;
 		
 		dealer_wins = 0;
