@@ -20,9 +20,9 @@ public class BlackjackSimulator {
 		Hand player_hand, split_hand;
 		Game game , split_game;
 		
-		debug = true;
+		debug = false;
 		
-		num_iterations = 1;
+		num_iterations = 10000000;
 		shuffle_point  = 20;
 		
 		dealer_wins = 0;
@@ -108,8 +108,11 @@ public class BlackjackSimulator {
 			split_hand = null;
 			split_count = 0;
 			
+			if (debug) System.out.println("checking split "+player_first.card_face_value+" "+player_second.card_face_value);
+			
 			if ( split ) {
 				
+				if (debug) System.out.println("we are going to split "+player_first.card_face_value+" "+player_second.card_face_value);
 				temp = player_second;
 				
 				/* get a new second card for the main hand */

@@ -4,7 +4,6 @@ public class Game {
 	
 	/*
 	 * need to implement
-	 * splitting
 	 * multiple decks
 	 */
 	
@@ -97,7 +96,7 @@ public class Game {
 	};
 
 	
-	boolean debug = true;
+	boolean debug = false;
 	
 	
 	public Game() {	
@@ -156,9 +155,20 @@ public class Game {
 					break;
 
 				case "ds":
-					bet.DoubleBet();
-					all_done = true;
-					if (debug) System.out.println("player doubles and stays");
+					if ( hand.NumCards() == 2 ) {  /* can only double with initial hand */
+						bet.DoubleBet();	
+						try
+						{
+							hand.AddCardToHand ( deck.Draw() );
+							if (debug) hand.PrintHand();
+						}
+						catch ( OutOfCards ooc )
+						{
+							throw new OutOfCards();
+						}
+					}
+					soft_done = true;   /* "ds" = double and stay, so we are done with soft */
+					if (debug) System.out.println("player doubles (if possible) and stays");
 					break;
 					
 				case "h":
@@ -175,9 +185,11 @@ public class Game {
 					break;
 
 				case "dh":
-					bet.DoubleBet();
-					all_done = true;
-					if (debug) System.out.println("player doubles and hits");
+					if ( hand.NumCards() == 2 ) {  /* can only double with initial hand */
+						bet.DoubleBet();
+						all_done = true;  /* after we hit, we are all done since we doubled */
+					}
+					if (debug) System.out.println("player doubles (if possible) and hits");
 					try
 					{
 						hand.AddCardToHand ( deck.Draw() );
@@ -226,9 +238,20 @@ public class Game {
 					break;
 
 				case "ds":
-					bet.DoubleBet();
-					all_done = true;
-					if (debug) System.out.println("player doubles and stays");
+					if ( hand.NumCards() == 2 ) {   /* can only double with first 2 cards */
+						bet.DoubleBet();
+						try
+						{
+							hand.AddCardToHand ( deck.Draw() );
+							if (debug) hand.PrintHand();
+						}
+						catch ( OutOfCards ooc )
+						{
+							throw new OutOfCards();
+						}
+					}
+					all_done = true;   /* "ds" = stay, so we are all done */
+					if (debug) System.out.println("player doubles (if possible) and stays");
 					break;
 					
 				case "h":
@@ -245,9 +268,11 @@ public class Game {
 					break;
 
 				case "dh":
-					bet.DoubleBet();
-					all_done = true;
-					if (debug) System.out.println("player doubles and hits");
+					if ( hand.NumCards() == 2 ) {  /* can only double with first 2 cards */
+						bet.DoubleBet();
+						all_done = true;  /* we doubled and hit, so we are all done */
+					}
+					if (debug) System.out.println("player doubles (if possible) and hits");
 					try
 					{
 						hand.AddCardToHand ( deck.Draw() );
