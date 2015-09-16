@@ -11,12 +11,13 @@ public class Game {
 	/*
 	 * Strategy matrices for the Player.
 	 * 
-	 * s = stand
-	 * h = hit
+	 * s  = stand
+	 * h  = hit
 	 * ds = double if possible, if not stand
 	 * dh = double if possible, if not hit
 	 * sp = split
 	 * su = surrender
+	 * x  = shouldn't hit this entry
 	 * 
 	 */
 	
@@ -45,6 +46,56 @@ public class Game {
 	/*        21 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" }
 	};
 	
+	
+	String[][] player_soft = new String[][] {
+	/* dealer up        2     3     4     5     6     7     8     9    10    11 */
+	/* player  2 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*         3 */  { "h",  "h",  "h",  "dh", "dh", "h",  "h",  "h",  "h",  "h" },
+	/*         4 */  { "h",  "h",  "h",  "dh", "dh", "h",  "h",  "h",  "h",  "h" },
+	/*         5 */  { "h",  "h",  "dh", "dh", "dh", "h",  "h",  "h",  "h",  "h" },
+	/*         6 */  { "h",  "h",  "dh", "dh", "dh", "h",  "h",  "h",  "h",  "h" },
+	/*         7 */  { "h",  "dh", "dh", "dh", "dh", "h",  "h",  "h",  "h",  "h" },
+	/*         8 */  { "s",  "ds", "ds", "ds", "ds", "s",  "s",  "h",  "h",  "h" },
+	/*         9 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
+	/*        10 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
+	/*        11 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        12 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        13 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        14 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        15 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        16 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        17 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        18 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        19 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        20 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        21 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" }
+	};
+	
+	
+	String[][] player_pair = new String[][] {
+	/* dealer up        2     3     4     5     6     7     8     9    10    11 */
+	/* pair    2 */  { "sp", "sp", "sp", "sp", "sp", "sp", "h",  "h",  "h",  "h" },
+	/*         3 */  { "sp", "sp", "sp", "sp", "sp", "sp", "h",  "h",  "h",  "h" },
+	/*         4 */  { "h",  "h",  "h",  "sp", "sp", "h",  "h",  "h",  "h",  "h" },
+	/*         5 */  { "dh", "dh", "dh", "dh", "dh", "dh", "dh", "dh", "h",  "h" },
+	/*         6 */  { "sp", "sp", "sp", "sp", "sp", "h",  "h",  "h",  "h",  "h" },
+	/*         7 */  { "sp", "sp", "sp", "sp", "sp", "sp", "h",  "h",  "h",  "h" },
+	/*         8 */  { "sp", "sp", "sp", "sp", "sp", "sp", "sp", "sp", "sp", "sp"},
+	/*         9 */  { "sp", "sp", "sp", "sp", "sp", "s",  "sp", "sp",  "s", "s" },
+	/*        10 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
+	/*        11 */  { "sp", "sp", "sp", "sp", "sp", "sp", "sp", "sp", "sp", "sp"},
+	/*        12 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        13 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        14 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        15 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        16 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        17 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        18 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        19 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        20 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
+	/*        21 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" }
+	};
+
 	boolean debug = false;
 	
 	
@@ -58,7 +109,7 @@ public class Game {
 	
 	public int PlayPlayerHand ( Deck deck , Card dealer_upcard , Bet bet , Hand hand , boolean dealer_bj ) throws OutOfCards {
 		
-		boolean done , surrender;
+		boolean all_done , soft_done, surrender , hand_is_soft;
 		
 		if (debug) System.out.println("");
 		if (debug) System.out.println("Playing Player Hand");
@@ -87,61 +138,150 @@ public class Game {
             throw new OutOfCards();
         }
 		
-		if (debug) System.out.println("player hand value is "+hand.HandValue() );	
+		if (debug) System.out.println("player hand value is "+hand.HandValue() );
+		if (debug) System.out.println("player alt hand value is "+hand.AltHandValue());
+		if (debug) System.out.println("player soft hand value is "+hand.SoftHandValue());
 		
 		surrender = false;
-		done = false;
+		all_done = false;
+		soft_done = false;
 		
-		while ( ( ! done ) && (hand.HandValue() <= 21 ) ) {
+		/*
+		 * Soft hand logic
+		 */
+		
+		/* evaluate if hand is soft */
+		
+		hand_is_soft = false;
+		if ( ( hand.SoftHandValue() <= 10 ) && ( hand.CountAces() >= 1 ) )  hand_is_soft = true;
 			
-			switch ( player_hard[hand.HandValue()-2][dealer_upcard.card_value-2]) {
+		while ( ( ! all_done ) && ( ! soft_done) && ( hand.HandValue() <= 21 ) && ( hand_is_soft ) ) {
+			
+			if (debug) System.out.println("soft hand logic");
+			
+			switch ( player_soft[hand.SoftHandValue()-2][dealer_upcard.card_value-2]) {
 			
 				case "s":
 					if (debug) System.out.println("player stays");
-					done = true;
+					soft_done = true;
 					break;
 
 				case "ds":
 					bet.DoubleBet();
-					done = true;
+					all_done = true;
 					if (debug) System.out.println("player doubles and stays");
-					done = true;
 					break;
 					
 				case "h":
 					if (debug) System.out.println("player hits");
 					try
-			        {
+					{
 						hand.AddCardToHand ( deck.Draw() );
 						if (debug) hand.PrintHand();
-			        }
-			        catch ( OutOfCards ooc )
-			        {
-			            throw new OutOfCards();
-			        }
+					}
+					catch ( OutOfCards ooc )
+					{
+						throw new OutOfCards();
+					}
 					break;
 
 				case "dh":
 					bet.DoubleBet();
-					done = true;
+					all_done = true;
 					if (debug) System.out.println("player doubles and hits");
 					try
-			        {
+					{
 						hand.AddCardToHand ( deck.Draw() );
 						if (debug) hand.PrintHand();
-			        }
-			        catch ( OutOfCards ooc )
-			        {
-			            throw new OutOfCards();
-			        }
+					}
+					catch ( OutOfCards ooc )
+					{
+						throw new OutOfCards();
+					}
+					break;
+					
+					case "su":
+						if ( ! dealer_bj) bet.HalveBet();
+						if (debug) System.out.println("player surrenders");
+					all_done = true;
+					surrender = true;
+					break;
+					
+				case "x":
+					System.out.println("Hit bad entry in play table");
+					all_done = true;
+					break;
+					
+			}
+			
+			hand_is_soft = false;
+			if ( ( hand.SoftHandValue() <= 10 ) && ( hand.CountAces() >=1 ) )  hand_is_soft = true;
+		}
+	
+			
+		/*
+		 * Hard hand logic
+		 * 
+		 * note - if we exited because of "done" above (e.g. doubled soft hand) hard hand logic should not be executed
+		 */
+		
+		while ( ( ! all_done ) && (hand.HandValue() <= 21 ) ) {
+				
+			if (debug) System.out.println("hard hand logic");
+			
+			switch ( player_hard[hand.HandValue()-2][dealer_upcard.card_value-2]) {
+			
+				case "s":
+					if (debug) System.out.println("player stays");
+					all_done = true;
+					break;
+
+				case "ds":
+					bet.DoubleBet();
+					all_done = true;
+					if (debug) System.out.println("player doubles and stays");
+					break;
+					
+				case "h":
+					if (debug) System.out.println("player hits");
+					try
+					{
+						hand.AddCardToHand ( deck.Draw() );
+						if (debug) hand.PrintHand();
+					}
+					catch ( OutOfCards ooc )
+					{
+						throw new OutOfCards();
+					}
+					break;
+
+				case "dh":
+					bet.DoubleBet();
+					all_done = true;
+					if (debug) System.out.println("player doubles and hits");
+					try
+					{
+						hand.AddCardToHand ( deck.Draw() );
+						if (debug) hand.PrintHand();
+					}
+					catch ( OutOfCards ooc )
+					{
+						throw new OutOfCards();
+					}
 					break;
 					
 				case "su":
-					if ( ! dealer_bj) bet.HalveBet();  /* can't surrender if dealer has blackjack */
+					if ( ! dealer_bj ) bet.HalveBet();  /* can't surrender if dealer has blackjack, assumes "s" if so */
 					if (debug) System.out.println("player surrenders");
-					done = true;
+					all_done = true;
 					surrender = true;
 					break;
+					
+				case "x":
+					System.out.println("Hit bad entry in play table");
+					all_done = true;
+					break;
+					
 			}
 		}
 		
@@ -153,6 +293,7 @@ public class Game {
 		
 		/* return the final hand value */
 		
+		if ( ( hand.HandValue() > 21 ) && ( hand.SoftHandValue() < 21 ) ) return ( hand.SoftHandValue() );
 		return ( hand.HandValue() );
 	}
 	

@@ -40,6 +40,22 @@ public class Hand {
 	}
 	
 	
+	public int SoftHandValue() {
+		int ac;
+		int count;
+		
+		count = this.HandValue();
+		ac = this.CountAces();
+		
+		while ( ac > 0 ) {
+			count = count - 10;
+			ac--;
+		}
+		
+		return ( count );
+	}
+
+	
 	public void AddCardToHand ( Card c ) {
 		hand[num_cards++] = c;
 	}
