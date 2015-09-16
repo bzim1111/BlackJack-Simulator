@@ -30,15 +30,15 @@ public class Game {
 	/*         5 */  { "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h" },
 	/*         6 */  { "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h" },
 	/*         7 */  { "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h" },
-	/*         8 */  { "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h",  "h" },
-	/*         9 */  { "h",  "dh", "dh", "dh", "dh", "h",  "h",  "h",  "h",  "h" },
+	/*         8 */  { "h",  "h",  "h",  "dh", "dh", "h",  "h",  "h",  "h",  "h" },
+	/*         9 */  { "dh", "dh", "dh", "dh", "dh", "h",  "h",  "h",  "h",  "h" },
 	/*        10 */  { "dh", "dh", "dh", "dh", "dh", "dh", "dh", "dh", "h",  "h" },
-	/*        11 */  { "dh", "dh", "dh", "dh", "dh", "dh", "dh", "dh", "dh", "h" },
+	/*        11 */  { "dh", "dh", "dh", "dh", "dh", "dh", "dh", "dh", "dh", "dh"},
 	/*        12 */  { "h",  "h",  "s",  "s",  "s",  "h",  "h",  "h",  "h",  "h" },
 	/*        13 */  { "s",  "s",  "s",  "s",  "s",  "h",  "h",  "h",  "h",  "h" },
 	/*        14 */  { "s",  "s",  "s",  "s",  "s",  "h",  "h",  "h",  "h",  "h" },
-	/*        15 */  { "s",  "s",  "s",  "s",  "s",  "h",  "h",  "h",  "su", "h" },
-	/*        16 */  { "s",  "s",  "s",  "s",  "s",  "h",  "h",  "su", "su", "su"},
+	/*        15 */  { "s",  "s",  "s",  "s",  "s",  "h",  "h",  "h",  "h",  "h" },
+	/*        16 */  { "s",  "s",  "s",  "s",  "s",  "h",  "h",  "h",  "h",  "h" },
 	/*        17 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
 	/*        18 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
 	/*        19 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
@@ -50,13 +50,13 @@ public class Game {
 	String[][] player_soft = new String[][] {
 	/* dealer up        2     3     4     5     6     7     8     9    10    11 */
 	/* player  2 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
-	/*         3 */  { "h",  "h",  "h",  "dh", "dh", "h",  "h",  "h",  "h",  "h" },
-	/*         4 */  { "h",  "h",  "h",  "dh", "dh", "h",  "h",  "h",  "h",  "h" },
+	/*         3 */  { "h",  "h",  "dh", "dh", "dh", "h",  "h",  "h",  "h",  "h" },
+	/*         4 */  { "h",  "h",  "dh", "dh", "dh", "h",  "h",  "h",  "h",  "h" },
 	/*         5 */  { "h",  "h",  "dh", "dh", "dh", "h",  "h",  "h",  "h",  "h" },
 	/*         6 */  { "h",  "h",  "dh", "dh", "dh", "h",  "h",  "h",  "h",  "h" },
-	/*         7 */  { "h",  "dh", "dh", "dh", "dh", "h",  "h",  "h",  "h",  "h" },
+	/*         7 */  { "dh", "dh", "dh", "dh", "dh", "h",  "h",  "h",  "h",  "h" },
 	/*         8 */  { "s",  "ds", "ds", "ds", "ds", "s",  "s",  "h",  "h",  "h" },
-	/*         9 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
+	/*         9 */  { "s",  "s",  "s",  "s",  "ds", "s",  "s",  "s",  "s",  "s" },
 	/*        10 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
 	/*        11 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
 	/*        12 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
@@ -75,11 +75,11 @@ public class Game {
 	String[][] player_pair = new String[][] {
 	/* dealer up        2     3     4     5     6     7     8     9    10    11 */
 	/* pair    2 */  { "sp", "sp", "sp", "sp", "sp", "sp", "h",  "h",  "h",  "h" },
-	/*         3 */  { "sp", "sp", "sp", "sp", "sp", "sp", "h",  "h",  "h",  "h" },
-	/*         4 */  { "h",  "h",  "h",  "sp", "sp", "h",  "h",  "h",  "h",  "h" },
+	/*         3 */  { "sp", "sp", "sp", "sp", "sp", "sp", "sp", "h",  "h",  "h" },
+	/*         4 */  { "h",  "h",  "sp", "sp", "sp", "h",  "h",  "h",  "h",  "h" },
 	/*         5 */  { "dh", "dh", "dh", "dh", "dh", "dh", "dh", "dh", "h",  "h" },
-	/*         6 */  { "sp", "sp", "sp", "sp", "sp", "h",  "h",  "h",  "h",  "h" },
-	/*         7 */  { "sp", "sp", "sp", "sp", "sp", "sp", "h",  "h",  "h",  "h" },
+	/*         6 */  { "sp", "sp", "sp", "sp", "sp", "sp", "h",  "h",  "h",  "h"},
+	/*         7 */  { "sp", "sp", "sp", "sp", "sp", "sp", "sp", "h",  "s",  "h" },
 	/*         8 */  { "sp", "sp", "sp", "sp", "sp", "sp", "sp", "sp", "sp", "sp"},
 	/*         9 */  { "sp", "sp", "sp", "sp", "sp", "s",  "sp", "sp",  "s", "s" },
 	/*        10 */  { "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s",  "s" },
@@ -360,7 +360,9 @@ public class Game {
 	
 	
 	public boolean CheckForSplit ( Card card1 , Card card2 , Card dealer_upcard ) {
-		if ( player_pair[card1.card_value-2][dealer_upcard.card_value-2] == "sp" ) return true;
+		
+		/* if ( player_pair[card1.card_value-2][dealer_upcard.card_value-2] == "sp" ) return true; */
+		
 		return ( false );
 	}
 	
