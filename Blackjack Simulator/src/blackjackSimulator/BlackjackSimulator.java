@@ -68,14 +68,14 @@ public class BlackjackSimulator {
 			dealer_has_bj = false;
 			if ( (dealer_first.card_value + dealer_second.card_value) == 21 ) dealer_has_bj = true;
 		
-			/* play the Player's hand */
-		
+			/* play the Player's hand */		
+
 			player_count = 0;
 			Bet player_bet = new Bet();
 		
 			try
 			{
-				player_count = game.PlayPlayerHand ( deck , dealer_second , player_bet , player_hand , dealer_has_bj );
+				player_count = game.PlayPlayerHand ( deck , dealer_second , player_bet, player_hand , dealer_has_bj );
 			}
 			catch ( OutOfCards ooc )
 			{

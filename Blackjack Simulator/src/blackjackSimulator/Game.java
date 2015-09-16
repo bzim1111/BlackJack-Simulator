@@ -17,7 +17,7 @@ public class Game {
 	 * dh = double if possible, if not hit
 	 * sp = split
 	 * su = surrender
-	 * x  = shouldn't hit this entry
+	 * x  = shouldn't hit this entry - this is a trap code to make sure we stay were we want to be in the matrices
 	 * 
 	 */
 	
@@ -107,7 +107,7 @@ public class Game {
 	 * Player play
 	 */
 	
-	public int PlayPlayerHand ( Deck deck , Card dealer_upcard , Bet bet , Hand hand , boolean dealer_bj ) throws OutOfCards {
+	public int PlayPlayerHand ( Deck deck , Card dealer_upcard , Bet bet ,  Hand hand , boolean dealer_bj ) throws OutOfCards {
 		
 		boolean all_done , soft_done, surrender , hand_is_soft;
 		
@@ -118,8 +118,8 @@ public class Game {
 		
 		try
         {
-		   hand.AddCardToHand ( deck.Draw() );
-		   if (debug) hand.PrintHand();
+			hand.AddCardToHand ( deck.Draw() );
+			if (debug) hand.PrintHand();
         }
         catch ( OutOfCards ooc )
         {
@@ -138,13 +138,15 @@ public class Game {
             throw new OutOfCards();
         }
 		
-		if (debug) System.out.println("player hand value is "+hand.HandValue() );
-		if (debug) System.out.println("player alt hand value is "+hand.AltHandValue());
-		if (debug) System.out.println("player soft hand value is "+hand.SoftHandValue());
+		/* clear all the flags */
 		
 		surrender = false;
 		all_done = false;
 		soft_done = false;
+		
+		if (debug) System.out.println("player hand value is "+hand.HandValue() );
+		if (debug) System.out.println("player alt hand value is "+hand.AltHandValue());
+		if (debug) System.out.println("player soft hand value is "+hand.SoftHandValue());
 		
 		/*
 		 * Soft hand logic
@@ -201,7 +203,7 @@ public class Game {
 					break;
 					
 					case "su":
-						if ( ! dealer_bj) bet.HalveBet();
+						if ( ! dealer_bj) bet.HalveBet();   /* can't surrender if dealer has blackjack */
 						if (debug) System.out.println("player surrenders");
 					all_done = true;
 					surrender = true;
@@ -222,10 +224,10 @@ public class Game {
 		/*
 		 * Hard hand logic
 		 * 
-		 * note - if we exited because of "done" above (e.g. doubled soft hand) hard hand logic should not be executed
+		 * note - if we exited because of "all_done" above (e.g. doubled soft hand) hard hand logic will not be executed
 		 */
 		
-		while ( ( ! all_done ) && (hand.HandValue() <= 21 ) ) {
+		while ( ( ! all_done ) && ( hand.HandValue() <= 21 ) ) {
 				
 			if (debug) System.out.println("hard hand logic");
 			
@@ -293,7 +295,8 @@ public class Game {
 		
 		/* return the final hand value */
 		
-		if ( ( hand.HandValue() > 21 ) && ( hand.SoftHandValue() < 21 ) ) return ( hand.SoftHandValue() );
+		if ( ( hand.HandValue() > 21 ) && ( hand.SoftHandValue() < 21 ) ) return (hand.SoftHandValue() );
+
 		return ( hand.HandValue() );
 	}
 	
