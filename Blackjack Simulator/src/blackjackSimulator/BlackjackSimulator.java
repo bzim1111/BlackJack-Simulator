@@ -18,7 +18,7 @@ public class BlackjackSimulator {
 		DecimalFormat df = new DecimalFormat("0.0");
 		Bet player_bet, split_bet;
 		Hand player_hand, split_hand;
-		Game game , split_game;
+		Game game;
 		
 		debug = false;
 		
@@ -34,9 +34,10 @@ public class BlackjackSimulator {
 		Deck deck = new Deck();
 		deck.ShuffleDeck();
 		
+		game = new Game();
+		
 		for ( j=1; j<=num_iterations; j++ ) {
 		
-			game = new Game();
 			player_hand = new Hand();
 		
 			/* Draw first card for Dealer (down card) */
@@ -171,11 +172,11 @@ public class BlackjackSimulator {
 			
 			if ( split ) {
 		
-				split_game = new Game();
+				/* split_game = new Game(); */
 				
 				try
 				{
-					split_count = split_game.PlayPlayerHand ( deck , split_first , split_second , dealer_second , split_bet, split_hand , dealer_has_bj );
+					split_count = game.PlayPlayerHand ( deck , split_first , split_second , dealer_second , split_bet, split_hand , dealer_has_bj );
 				}
 				catch ( OutOfCards ooc )
 				{
