@@ -8,12 +8,12 @@ public class BlackjackSimulator {
 	public static void main(String[] args) {
 		
 		int dealer_count , player_count;
-		Card dealer_first , dealer_second;
+		Card dealer_first , dealer_second , player_first , player_second;
 		int j;
 		int num_iterations, shuffle_point;
 		int dealer_wins, player_wins, pushes;
 		float dealer_pct, player_pct;
-		boolean debug, dealer_has_bj;
+		boolean debug, dealer_has_bj , split;
 		double bankroll, pct_per_hand;
 		DecimalFormat df = new DecimalFormat("0.0");
 		
@@ -57,7 +57,7 @@ public class BlackjackSimulator {
 			}
 			catch ( OutOfCards ooc )
 			{
-        	System.out.println("out of cards");
+				System.out.println("out of cards");
 			}
 		
 			if (debug) System.out.println("initial dealer cards");
@@ -67,15 +67,49 @@ public class BlackjackSimulator {
 			/* check Dealer's hand for blackjack */
 			dealer_has_bj = false;
 			if ( (dealer_first.card_value + dealer_second.card_value) == 21 ) dealer_has_bj = true;
-		
-			/* play the Player's hand */		
+			
+			/* draw first card for Player */
+			
+			player_first = null;
+			try
+	        {
+				player_first = deck.Draw();
+	        }
+	        catch ( OutOfCards ooc )
+	        {
+	        	System.out.println("out of cards");
+	        }
+			
+			/* draw second card for Player */
+			
+			player_second = null;
+			try
+	        {
+				player_second = deck.Draw();
+	        }
+	        catch ( OutOfCards ooc )
+	        {
+	            System.out.println("out of cards");
+	        }
+
+			/* check if the Player wants to split */
+			
+			split = game.CheckForSplit ( player_first , player_second , dealer_second);
+			if ( split ) {
+				/* get a new second card for the first hand */
+				/* get a new first card for second hand */
+				/* establish a second bet */
+				/* establish a new player_hand */
+			}
+			
+			/* play the Player's first hand */		
 
 			player_count = 0;
 			Bet player_bet = new Bet();
 		
 			try
 			{
-				player_count = game.PlayPlayerHand ( deck , dealer_second , player_bet, player_hand , dealer_has_bj );
+				player_count = game.PlayPlayerHand ( deck , player_first , player_second , dealer_second , player_bet, player_hand , dealer_has_bj );
 			}
 			catch ( OutOfCards ooc )
 			{
@@ -85,6 +119,8 @@ public class BlackjackSimulator {
 			if (debug) System.out.println("FINAL PLAYER COUNT = "+player_count);
 			if (debug) System.out.println("FINAL PLAYER BET = "+df.format(player_bet.BetAmount()));
 	
+			/* play the Player's second hand, if he chose to split */
+			
 		
 			/* play the Dealer's hand, if the Player didn't bust */
 		
@@ -102,7 +138,7 @@ public class BlackjackSimulator {
 				if (debug) System.out.println("FINAL DEALER COUNT = "+dealer_count);
 			}
 		
-			/* evaluate the winner */
+			/* evaluate the winner of the first hand */
 		
 			if (debug) System.out.println("");
 		
@@ -138,6 +174,12 @@ public class BlackjackSimulator {
 					}
 				}
 			}   /* end of winner evaluation */
+			
+			/* evaluate the winner of the second hand */
+			
+			if ( split ) {
+				/* evaluate the winner of the second hand */
+			}
 			
 			if (deck.CardsLeft() < shuffle_point ) deck.ShuffleDeck();
 			

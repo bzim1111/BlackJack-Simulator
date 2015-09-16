@@ -107,36 +107,22 @@ public class Game {
 	 * Player play
 	 */
 	
-	public int PlayPlayerHand ( Deck deck , Card dealer_upcard , Bet bet ,  Hand hand , boolean dealer_bj ) throws OutOfCards {
+	public int PlayPlayerHand ( Deck deck , Card card1, Card card2, Card dealer_upcard , Bet bet ,  Hand hand , boolean dealer_bj ) throws OutOfCards {
 		
 		boolean all_done , soft_done, surrender , hand_is_soft;
 		
 		if (debug) System.out.println("");
 		if (debug) System.out.println("Playing Player Hand");
 		
-		/* draw first card */
+		/* add first card to hand */
 		
-		try
-        {
-			hand.AddCardToHand ( deck.Draw() );
-			if (debug) hand.PrintHand();
-        }
-        catch ( OutOfCards ooc )
-        {
-            throw new OutOfCards();
-        }
+		hand.AddCardToHand ( card1 );
+		if (debug) hand.PrintHand();
 		
-		/* draw second card */
+		/* add second card to hand */
 		
-		try
-        {
-			hand.AddCardToHand ( deck.Draw() );
-			if (debug) hand.PrintHand();
-        }
-        catch ( OutOfCards ooc )
-        {
-            throw new OutOfCards();
-        }
+		hand.AddCardToHand ( card2 );
+		if (debug) hand.PrintHand();
 		
 		/* clear all the flags */
 		
@@ -370,6 +356,13 @@ public class Game {
 		/* now we are done checking soft hand, return whatever the final value is */
 		
 		return ( hand.AltHandValue() );
-		
 	}
+	
+	
+	public boolean CheckForSplit ( Card card1 , Card card2 , Card dealer_upcard ) {
+		if ( player_pair[card1.card_value-2][dealer_upcard.card_value-2] == "sp" ) return true;
+		return ( false );
+	}
+	
+	
 }
