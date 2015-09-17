@@ -1,7 +1,5 @@
 package blackjackSimulator;
 
-import javax.net.ssl.SSLEngineResult.HandshakeStatus;
-
 public class Hand {
 
 	private Card hand[] = new Card[52];

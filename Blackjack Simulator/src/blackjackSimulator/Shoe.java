@@ -5,13 +5,21 @@ import java.util.Random;
 public class Shoe {
 
 	private int num_decks , shoe_card_count , shoe_current_card;
-	private Deck[] shoe_decks;
+	private Deck[] shoe_decks = new Deck[8];
 	private int[] shoe_draw_order;
 	
+	boolean debug = false;
 	
-	public Shoe ( int d ) {		
-		num_decks = d;
-		shoe_decks = new Deck[num_decks];	/* have to bounds check this */	
+	
+	public Shoe ( int nd ) {	
+		
+		int i;
+		
+		num_decks = nd;
+		
+		if (debug) System.out.println("initializing shoe_decks");
+		
+		for ( i=0; i<num_decks; i++ ) shoe_decks[i] = new Deck();
 	}
 	
 	
@@ -20,9 +28,18 @@ public class Shoe {
 		Card c;
 		int which_deck;
 		
+		if (debug) System.out.println("shoe draw order = "+shoe_draw_order[shoe_current_card]);
+		if (debug) System.out.println("shoe_current card = "+shoe_current_card);
+		if (debug) System.out.println("shoe decks = "+shoe_decks[0]);
+		
 		which_deck = shoe_draw_order[shoe_current_card] / 52;
 		
+		if (debug) System.out.println("which deck = "+which_deck);
+		if (debug) System.out.println("which card = "+shoe_draw_order[shoe_current_card]%52);
+		
 		c = shoe_decks[which_deck].GetCard(shoe_draw_order[shoe_current_card]%52);
+		
+		shoe_current_card++;
 		
 		if ( c.card_value <= 6 ) shoe_card_count++;
 		if ( c.card_value >= 10 ) shoe_card_count--;

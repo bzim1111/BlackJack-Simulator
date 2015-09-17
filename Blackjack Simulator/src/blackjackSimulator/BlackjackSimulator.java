@@ -10,7 +10,7 @@ public class BlackjackSimulator {
 		int dealer_count , player_count, split_count, count_high_target , count_doubles, count_low_target , count_halves;
 		Card dealer_first , dealer_second , player_first , player_second , split_first , split_second , temp;
 		int i , j;
-		int num_iterations, shuffle_point;
+		int num_iterations, shuffle_point , num_decks;
 		int dealer_wins, player_wins, pushes;
 		float dealer_pct, player_pct;
 		boolean debug, dealer_has_bj , split, count_cards;
@@ -24,6 +24,7 @@ public class BlackjackSimulator {
 		
 		num_iterations = 1000000;
 		shuffle_point  = 20;
+		num_decks = 8;
 		
 		count_high_target = 3;
 		count_doubles = 3;
@@ -39,8 +40,8 @@ public class BlackjackSimulator {
 		bankroll = 0.0;
 		
 
-		Deck deck = new Deck();
-		deck.ShuffleDeck();
+		Shoe shoe = new Shoe ( num_decks );
+		shoe.ShuffleShoe();
 		
 		game = new Game();
 		
@@ -53,7 +54,7 @@ public class BlackjackSimulator {
 			dealer_first = null;
 			try
 			{
-				dealer_first = deck.Draw();
+				dealer_first = shoe.ShoeDraw();
 			}
 			catch ( OutOfCards ooc )
 			{
@@ -65,7 +66,7 @@ public class BlackjackSimulator {
 			dealer_second = null;
 			try
 			{
-				dealer_second = deck.Draw();
+				dealer_second = shoe.ShoeDraw();
 			}
 			catch ( OutOfCards ooc )
 			{
@@ -86,7 +87,7 @@ public class BlackjackSimulator {
 			player_first = null;
 			try
 	        {
-				player_first = deck.Draw();
+				player_first = shoe.ShoeDraw();
 	        }
 	        catch ( OutOfCards ooc )
 	        {
@@ -98,7 +99,7 @@ public class BlackjackSimulator {
 			player_second = null;
 			try
 	        {
-				player_second = deck.Draw();
+				player_second = shoe.ShoeDraw();
 	        }
 	        catch ( OutOfCards ooc )
 	        {
@@ -128,7 +129,7 @@ public class BlackjackSimulator {
 				
 				try
 		        {
-					player_second = deck.Draw();
+					player_second = shoe.ShoeDraw();
 		        }
 		        catch ( OutOfCards ooc )
 		        {
@@ -140,7 +141,7 @@ public class BlackjackSimulator {
 				split_second = temp;
 				try
 		        {
-					split_first = deck.Draw();
+					split_first = shoe.ShoeDraw();
 		        }
 		        catch ( OutOfCards ooc )
 		        {
@@ -163,15 +164,15 @@ public class BlackjackSimulator {
 		
 			try
 			{
-				if ( ( deck.CardCount() >= count_high_target ) && ( count_cards ) ) {
+				if ( ( shoe.ShoeCardCount() >= count_high_target ) && ( count_cards ) ) {
 					for ( i=1; i<= count_doubles; i++ ) player_bet.DoubleBet();
 				}
-				if ( ( deck.CardCount() <= count_low_target ) && ( count_cards ) ) {
+				if ( ( shoe.ShoeCardCount() <= count_low_target ) && ( count_cards ) ) {
 					for ( i=1; i<= count_halves; i++ ) player_bet.HalveBet();
 				}
 
 
-				player_count = game.PlayPlayerHand ( deck , player_first , player_second , dealer_second , player_bet, player_hand , dealer_has_bj );
+				player_count = game.PlayPlayerHand ( shoe , player_first , player_second , dealer_second , player_bet, player_hand , dealer_has_bj );
 			}
 			catch ( OutOfCards ooc )
 			{
@@ -190,14 +191,14 @@ public class BlackjackSimulator {
 		
 				try
 				{
-					if ( ( deck.CardCount() >= count_high_target ) && ( count_cards ) ) {
+					if ( ( shoe.ShoeCardCount() >= count_high_target ) && ( count_cards ) ) {
 						for ( i=1; i<= count_doubles; i++ ) player_bet.DoubleBet();
 					}
-					if ( ( deck.CardCount() <= count_low_target ) && ( count_cards ) ) {
+					if ( ( shoe.ShoeCardCount() <= count_low_target ) && ( count_cards ) ) {
 						for ( i=1; i<= count_halves; i++ ) player_bet.HalveBet();
 					}
 
-					split_count = game.PlayPlayerHand ( deck , split_first , split_second , dealer_second , split_bet, split_hand , dealer_has_bj );
+					split_count = game.PlayPlayerHand ( shoe , split_first , split_second , dealer_second , split_bet, split_hand , dealer_has_bj );
 				}
 				catch ( OutOfCards ooc )
 				{
@@ -214,7 +215,7 @@ public class BlackjackSimulator {
 			if ( ( player_count <= 21 ) || ( split && (split_count <= 21) ) ) {
 				try
 				{
-					dealer_count = game.PlayDealerHand ( deck , dealer_first , dealer_second );
+					dealer_count = game.PlayDealerHand ( shoe , dealer_first , dealer_second );
 				}
 				catch ( OutOfCards ooc )
 				{
@@ -301,7 +302,7 @@ public class BlackjackSimulator {
 				}   /* end of winner evaluation */
 			}
 			
-			if (deck.CardsLeft() < shuffle_point ) deck.ShuffleDeck();
+			if (shoe.ShoeCardsLeft() < shuffle_point ) shoe.ShuffleShoe();
 			
 		} /* end of game iteration */
 		

@@ -107,7 +107,7 @@ public class Game {
 	 * Player play
 	 */
 	
-	public int PlayPlayerHand ( Deck deck , Card card1, Card card2, Card dealer_upcard , Bet bet ,  Hand hand , boolean dealer_bj ) throws OutOfCards {
+	public int PlayPlayerHand ( Shoe shoe , Card card1, Card card2, Card dealer_upcard , Bet bet ,  Hand hand , boolean dealer_bj ) throws OutOfCards {
 		
 		boolean all_done , soft_done, surrender , hand_is_soft;
 		
@@ -159,7 +159,7 @@ public class Game {
 						bet.DoubleBet();	
 						try
 						{
-							hand.AddCardToHand ( deck.Draw() );
+							hand.AddCardToHand ( shoe.ShoeDraw() );
 							if (debug) hand.PrintHand();
 						}
 						catch ( OutOfCards ooc )
@@ -175,7 +175,7 @@ public class Game {
 					if (debug) System.out.println("player hits");
 					try
 					{
-						hand.AddCardToHand ( deck.Draw() );
+						hand.AddCardToHand ( shoe.ShoeDraw() );
 						if (debug) hand.PrintHand();
 					}
 					catch ( OutOfCards ooc )
@@ -192,7 +192,7 @@ public class Game {
 					if (debug) System.out.println("player doubles (if possible) and hits");
 					try
 					{
-						hand.AddCardToHand ( deck.Draw() );
+						hand.AddCardToHand ( shoe.ShoeDraw() );
 						if (debug) hand.PrintHand();
 					}
 					catch ( OutOfCards ooc )
@@ -242,7 +242,7 @@ public class Game {
 						bet.DoubleBet();
 						try
 						{
-							hand.AddCardToHand ( deck.Draw() );
+							hand.AddCardToHand ( shoe.ShoeDraw() );
 							if (debug) hand.PrintHand();
 						}
 						catch ( OutOfCards ooc )
@@ -258,7 +258,7 @@ public class Game {
 					if (debug) System.out.println("player hits");
 					try
 					{
-						hand.AddCardToHand ( deck.Draw() );
+						hand.AddCardToHand ( shoe.ShoeDraw() );
 						if (debug) hand.PrintHand();
 					}
 					catch ( OutOfCards ooc )
@@ -275,7 +275,7 @@ public class Game {
 					if (debug) System.out.println("player doubles (if possible) and hits");
 					try
 					{
-						hand.AddCardToHand ( deck.Draw() );
+						hand.AddCardToHand ( shoe.ShoeDraw() );
 						if (debug) hand.PrintHand();
 					}
 					catch ( OutOfCards ooc )
@@ -317,7 +317,7 @@ public class Game {
 	 * Dealer play
 	 */
 	
-	public int PlayDealerHand  ( Deck deck , Card first_card , Card second_card ) throws OutOfCards {
+	public int PlayDealerHand  ( Shoe shoe , Card first_card , Card second_card ) throws OutOfCards {
 		
 		Hand hand;
 		hand = new Hand();
@@ -340,7 +340,7 @@ public class Game {
 			
 			try
 	        {
-				hand.AddCardToHand ( deck.Draw() );
+				hand.AddCardToHand ( shoe.ShoeDraw() );
 				if (debug) hand.PrintHand();
 	        }
 	        catch ( OutOfCards ooc )
@@ -367,7 +367,7 @@ public class Game {
 				
 				try
 		        {
-					hand.AddCardToHand ( deck.Draw() );
+					hand.AddCardToHand ( shoe.ShoeDraw() );
 					if (debug) hand.PrintHand();
 		        }
 		        catch ( OutOfCards ooc )
