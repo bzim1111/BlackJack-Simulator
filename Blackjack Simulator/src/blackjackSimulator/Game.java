@@ -5,7 +5,6 @@ public class Game {
 	/*
 	 * need to implement
 	 * multiple decks
-	 * card counting option
 	 */
 	
 	/*

@@ -7,6 +7,7 @@ public class Deck {
 	private Card deck[] = new Card[52];
 	private int current_card = 0;
 	private int[] draw_order = new int[52];
+	private int card_count;
 
 	
 	public Deck ()	{
@@ -25,10 +26,23 @@ public class Deck {
 	
 	
 	public Card Draw() throws OutOfCards {
+		
+		Card c;
+		
+		c = deck[draw_order[current_card++]];
+		
+		if ( c.card_value <= 6 ) card_count++;
+		if ( c.card_value >= 10 ) card_count--;
+		
 		if ( current_card < 52 )
-			return deck[draw_order[current_card++]];
+			return c;
 		else
 			throw new OutOfCards();
+	}
+	
+	
+	public int CardCount() {
+		return card_count;
 	}
 	
 	
@@ -46,6 +60,7 @@ public class Deck {
 
 		boolean done = false;
 		int current_position = 0;
+		card_count = 0;
 		
 		/* initialize the used array for random numbers */
 		

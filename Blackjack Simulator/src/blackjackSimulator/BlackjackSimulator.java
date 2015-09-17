@@ -7,13 +7,13 @@ public class BlackjackSimulator {
 	
 	public static void main(String[] args) {
 		
-		int dealer_count , player_count, split_count;
+		int dealer_count , player_count, split_count, count_high_target , count_doubles, count_low_target , count_halves;
 		Card dealer_first , dealer_second , player_first , player_second , split_first , split_second , temp;
-		int j;
+		int i , j;
 		int num_iterations, shuffle_point;
 		int dealer_wins, player_wins, pushes;
 		float dealer_pct, player_pct;
-		boolean debug, dealer_has_bj , split;
+		boolean debug, dealer_has_bj , split, count_cards;
 		double bankroll, pct_per_hand;
 		DecimalFormat df = new DecimalFormat("0.0");
 		Bet player_bet, split_bet;
@@ -22,8 +22,16 @@ public class BlackjackSimulator {
 		
 		debug = false;
 		
-		num_iterations = 10000000;
+		num_iterations = 1000000;
 		shuffle_point  = 20;
+		
+		count_high_target = 3;
+		count_doubles = 3;
+		
+		count_low_target = -3;
+		count_halves = 3;
+		
+		count_cards = true;
 		
 		dealer_wins = 0;
 		player_wins = 0;
@@ -155,6 +163,14 @@ public class BlackjackSimulator {
 		
 			try
 			{
+				if ( ( deck.CardCount() >= count_high_target ) && ( count_cards ) ) {
+					for ( i=1; i<= count_doubles; i++ ) player_bet.DoubleBet();
+				}
+				if ( ( deck.CardCount() <= count_low_target ) && ( count_cards ) ) {
+					for ( i=1; i<= count_halves; i++ ) player_bet.HalveBet();
+				}
+
+
 				player_count = game.PlayPlayerHand ( deck , player_first , player_second , dealer_second , player_bet, player_hand , dealer_has_bj );
 			}
 			catch ( OutOfCards ooc )
@@ -172,10 +188,15 @@ public class BlackjackSimulator {
 			
 			if ( split ) {
 		
-				/* split_game = new Game(); */
-				
 				try
 				{
+					if ( ( deck.CardCount() >= count_high_target ) && ( count_cards ) ) {
+						for ( i=1; i<= count_doubles; i++ ) player_bet.DoubleBet();
+					}
+					if ( ( deck.CardCount() <= count_low_target ) && ( count_cards ) ) {
+						for ( i=1; i<= count_halves; i++ ) player_bet.HalveBet();
+					}
+
 					split_count = game.PlayPlayerHand ( deck , split_first , split_second , dealer_second , split_bet, split_hand , dealer_has_bj );
 				}
 				catch ( OutOfCards ooc )
