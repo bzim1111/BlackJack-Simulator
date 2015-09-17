@@ -41,6 +41,11 @@ public class Deck {
 	}
 	
 	
+	public Card GetCard ( int card_num ) {
+		return ( deck[card_num] );
+	}
+	
+	
 	public int CardCount() {
 		return card_count;
 	}
@@ -108,6 +113,10 @@ public class Deck {
 		/* re-set the current draw position */
 		
 		current_card = 0;
+		
+		/* re-set the card count */
+		
+		card_count = 0;
 	}
 	
 	
