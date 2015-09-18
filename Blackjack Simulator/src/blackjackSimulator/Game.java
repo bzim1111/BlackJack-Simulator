@@ -1,12 +1,7 @@
 package blackjackSimulator;
 
 public class Game {
-	
-	/*
-	 * need to implement
-	 * multiple decks
-	 */
-	
+		
 	/*
 	 * Strategy matrices for the Player.
 	 * 
@@ -20,6 +15,7 @@ public class Game {
 	 * 
 	 */
 	
+	/* matrix for hard hands (no aces in the hand) */
 	
 	String[][] player_hard = new String[][] {
 	/* dealer up        2     3     4     5     6     7     8     9    10    11 */
@@ -46,6 +42,8 @@ public class Game {
 	};
 	
 	
+	/* matrix for soft hands (1+ aces in the hand) */
+	
 	String[][] player_soft = new String[][] {
 	/* dealer up        2     3     4     5     6     7     8     9    10    11 */
 	/* player  2 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" },
@@ -70,6 +68,8 @@ public class Game {
 	/*        21 */  { "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x",  "x" }
 	};
 	
+	
+	/* matrix for pairs */
 	
 	String[][] player_pair = new String[][] {
 	/* dealer up        2     3     4     5     6     7     8     9    10    11 */
@@ -98,6 +98,11 @@ public class Game {
 	
 	boolean debug = false;
 	
+	
+	/*
+	 * Constructor 
+	 * Nothing to do here
+	 */
 	
 	public Game() {	
 	}
@@ -142,18 +147,28 @@ public class Game {
 		
 		hand_is_soft = false;
 		if ( ( hand.SoftHandValue() <= 10 ) && ( hand.CountAces() >= 1 ) )  hand_is_soft = true;
-			
+	
+		/* loop as long as hand is soft and we are not done playing */
+		/* note - if we exit on soft_done, it means hand is no longer soft and we can play the hard logic. */
+		/*        if we exit on all_done, hard logic will not fire later on */
+		
 		while ( ( ! all_done ) && ( ! soft_done) && ( hand.HandValue() <= 21 ) && ( hand_is_soft ) ) {
 			
 			if (debug) System.out.println("soft hand logic");
 			
-			switch ( player_soft[hand.SoftHandValue()-2][dealer_upcard.card_value-2]) {
+			/* process the action specified in the soft hand matrix */
+			
+			switch ( player_soft[hand.SoftHandValue()-2][dealer_upcard.card_value-2]) {    /* note (-2) since zero oriented array and array starts at card = 2 */
+			
+				/* stay */
 			
 				case "s":
 					if (debug) System.out.println("player stays");
 					soft_done = true;
 					break;
 
+				/* double if possible, else stay */
+					
 				case "ds":
 					if ( hand.NumCards() == 2 ) {  /* can only double with initial hand */
 						bet.DoubleBet();	
@@ -171,6 +186,8 @@ public class Game {
 					if (debug) System.out.println("player doubles (if possible) and stays");
 					break;
 					
+				/* hit */
+					
 				case "h":
 					if (debug) System.out.println("player hits");
 					try
@@ -184,6 +201,8 @@ public class Game {
 					}
 					break;
 
+				/* double if possible, else hit */
+					
 				case "dh":
 					if ( hand.NumCards() == 2 ) {  /* can only double with initial hand */
 						bet.DoubleBet();
@@ -201,6 +220,8 @@ public class Game {
 					}
 					break;
 					
+					/* surrender */
+					
 					case "su":
 						if ( ! dealer_bj) bet.HalveBet();   /* can't surrender if dealer has blackjack */
 						if (debug) System.out.println("player surrenders");
@@ -208,12 +229,16 @@ public class Game {
 					surrender = true;
 					break;
 					
-				case "x":
-					System.out.println("Hit bad entry in play table");
-					all_done = true;
-					break;
+					/* trap - should never hit this */
+					
+					case "x":
+						System.out.println("Hit bad entry in play table");
+						all_done = true;
+						break;
 					
 			}
+			
+			/* check if hand is still soft */
 			
 			hand_is_soft = false;
 			if ( ( hand.SoftHandValue() <= 10 ) && ( hand.CountAces() >=1 ) )  hand_is_soft = true;
@@ -232,11 +257,15 @@ public class Game {
 			
 			switch ( player_hard[hand.HandValue()-2][dealer_upcard.card_value-2]) {
 			
+				/* stay */
+			
 				case "s":
 					if (debug) System.out.println("player stays");
 					all_done = true;
 					break;
 
+				/* double if possible, else stay */
+					
 				case "ds":
 					if ( hand.NumCards() == 2 ) {   /* can only double with first 2 cards */
 						bet.DoubleBet();
@@ -254,6 +283,8 @@ public class Game {
 					if (debug) System.out.println("player doubles (if possible) and stays");
 					break;
 					
+				/* hit */
+					
 				case "h":
 					if (debug) System.out.println("player hits");
 					try
@@ -267,6 +298,8 @@ public class Game {
 					}
 					break;
 
+				/* double if possible, else hit */
+					
 				case "dh":
 					if ( hand.NumCards() == 2 ) {  /* can only double with first 2 cards */
 						bet.DoubleBet();
@@ -284,12 +317,16 @@ public class Game {
 					}
 					break;
 					
+				/* surrender */
+					
 				case "su":
 					if ( ! dealer_bj ) bet.HalveBet();  /* can't surrender if dealer has blackjack, assumes "s" if so */
 					if (debug) System.out.println("player surrenders");
 					all_done = true;
 					surrender = true;
 					break;
+					
+				/* trap - we should never hit this */
 					
 				case "x":
 					System.out.println("Hit bad entry in play table");
@@ -332,7 +369,7 @@ public class Game {
 		
 		if (debug) System.out.println("dealer hand value is "+hand.HandValue() );
 		
-		/* dealer hits until hand value is 17+ */
+		/* dealer hits until hand value is 17+, not implementing hit on soft 17 */
 		
 		while ( hand.HandValue() < 17 ) {
 			
@@ -357,7 +394,7 @@ public class Game {
 		
 		/* Dealer is > 21, check for aces (soft hand) */
 		
-		if ( hand.HandValue() > 21 ) {
+		if ( hand.HandValue() > 21 ) {   /* dealer over 21, but need to check potential soft hand value */
 			
 			/* check the soft (Alternate) hand value, hit 16 and below */
 			
@@ -385,7 +422,13 @@ public class Game {
 	}
 	
 	
+	/*
+	 * Check if Player wants to split
+	 */
+	
 	public boolean CheckForSplit ( Card card1 , Card card2 , Card dealer_upcard ) {
+		
+		/* cards have to be the same face value (e.g. both Kings) and the pair matrix has to specify split ("sp") */
 		
 		if ( ( card1.card_face_value == card2.card_face_value ) && 
 		     ( player_pair[card1.card_value-2][dealer_upcard.card_value-2] == "sp" ) ) return true;

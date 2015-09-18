@@ -1,8 +1,12 @@
 package blackjackSimulator;
 
+/* card suits */
+
 enum suit {
 	hearts, spades, diamonds, clubs;
 }
+
+/* card face values */
 
 enum face_value {
 	ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king;
@@ -13,6 +17,11 @@ public class Card {
 	suit card_suit;
 	face_value card_face_value;
 	int card_value;
+	
+	/*
+	 * Constructor
+	 * Set the suit and face value
+	 */
 	
 	public Card ( suit s , face_value fv )	{
 		
@@ -55,6 +64,10 @@ public class Card {
 			break;
 		}
 	}
+	
+	/*
+	 * Print out a card
+	 */
 	
 	public void PrintCard () {
 		

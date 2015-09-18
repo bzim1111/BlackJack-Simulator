@@ -6,10 +6,18 @@ public class Hand {
 	private int num_cards;
 	
 	
+	/*
+	 * Constructor
+	 */
+	
 	public Hand () {
-		num_cards = 0;
+		num_cards = 0;   /* initialize 0 cards in the hand */
 	}
 	
+	
+	/*
+	 * Evaluate the hand value (sum of the card values), with Ace=11
+	 */
 	
 	public int HandValue () {	
 		int i;
@@ -23,6 +31,10 @@ public class Hand {
 		return ( count );
 	}
 	
+	
+	/*
+	 * Evaluate the a final hand value - with Aces = 1 until the hand count < 21
+	 */
 	
 	public int AltHandValue() {
 		int ac;
@@ -40,6 +52,10 @@ public class Hand {
 	}
 	
 	
+	/*
+	 * Evaluate a "soft" hand value - with all Aces = 1
+	 */
+	
 	public int SoftHandValue() {
 		int ac;
 		int count;
@@ -54,12 +70,20 @@ public class Hand {
 		
 		return ( count );
 	}
-
+	
+	
+	/*
+	 * Add a card to the hand, increment number of cards in the hand
+	 */
 	
 	public void AddCardToHand ( Card c ) {
 		hand[num_cards++] = c;
 	}
 	
+	
+	/*
+	 * Check if a hand has an ace
+	 */
 	
 	public boolean HasAce() {
 		int i;
@@ -70,6 +94,10 @@ public class Hand {
 		return false;
 	}
 	
+	
+	/*
+	 * Count the aces in a hand
+	 */
 	
 	public int CountAces() {
 		int i;
@@ -84,10 +112,19 @@ public class Hand {
 	}
 	
 	
+	/*
+	 * Return the number of cards in a hand
+	 * note - num_cards starts at 0, so even though it's been incremented it's the correct count for the hand
+	 */
+	
 	public int NumCards() {
 		return ( num_cards );
 	}
 	
+	
+	/*
+	 * Print out a hand
+	 */
 	
 	public void PrintHand() {
 		int i;

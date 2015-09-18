@@ -20,33 +20,46 @@ public class BlackjackSimulator {
 		Hand player_hand, split_hand;
 		Game game;
 		
-		debug = false;
+		debug = false;				/* turn on/off debug */
 		
-		num_iterations = 1000000;
-		shuffle_point  = 20;
-		num_decks = 8;
+		/*
+		 * Parameters - will be replaced with GUI and XML/JSON
+		 */
 		
-		count_high_target = 3;
-		count_doubles = 3;
+		num_iterations = 100000;	/* number of iterations to simulate */
+		shuffle_point  = 20;		/* when this many or fewer cards left in shoe, re-shuffle */
+		num_decks = 8;				/* number of decks in the shoe */
 		
-		count_low_target = -3;
-		count_halves = 3;
+		count_high_target = 3;		/* when counting cards, raise bet when this count is hit */
+		count_doubles = 3;			/* number of times to double the bet (e.g. 3 = 8 times the base bet) */
 		
-		count_cards = true;
+		count_low_target = -3;		/* when counting cards, lower bet when this count is hit */
+		count_halves = 3;			/* number of times to halve the bet (e.g. 3 = 1/8 the base bet) */
+		
+		count_cards = true;			/* turn on/off card counting */
+		
+		/* initialize some counters */
 		
 		dealer_wins = 0;
 		player_wins = 0;
 		pushes = 0;
 		bankroll = 0.0;
 		
+		/* create the shoe and shuffle */
 
 		Shoe shoe = new Shoe ( num_decks );
 		shoe.ShuffleShoe();
 		
+		/* create the game */
+		
 		game = new Game();
+		
+		/* iterate through the specified number of hand simulations */
 		
 		for ( j=1; j<=num_iterations; j++ ) {
 		
+			/* create the Player hand */
+			
 			player_hand = new Hand();
 		
 			/* Draw first card for Dealer (down card) */
@@ -110,6 +123,8 @@ public class BlackjackSimulator {
 			
 			split = game.CheckForSplit ( player_first , player_second , dealer_second );
 			
+			/* initialize the split variables */
+			
 			split_first = null;
 			split_second = null;
 			split_first = null;
@@ -123,6 +138,9 @@ public class BlackjackSimulator {
 			if ( split ) {
 				
 				if (debug) System.out.println("we are going to split "+player_first.card_face_value+" "+player_second.card_face_value);
+			
+				/* temporarily store the second card */
+				
 				temp = player_second;
 				
 				/* get a new second card for the main hand */
@@ -164,6 +182,8 @@ public class BlackjackSimulator {
 		
 			try
 			{
+				/* process card counting, if enabled */
+				
 				if ( ( shoe.ShoeCardCount() >= count_high_target ) && ( count_cards ) ) {
 					for ( i=1; i<= count_doubles; i++ ) player_bet.DoubleBet();
 				}
@@ -171,7 +191,8 @@ public class BlackjackSimulator {
 					for ( i=1; i<= count_halves; i++ ) player_bet.HalveBet();
 				}
 
-
+				/* play the hand */
+				
 				player_count = game.PlayPlayerHand ( shoe , player_first , player_second , dealer_second , player_bet, player_hand , dealer_has_bj );
 			}
 			catch ( OutOfCards ooc )
@@ -191,6 +212,8 @@ public class BlackjackSimulator {
 		
 				try
 				{
+					/* handle card counting, if enabled */
+					
 					if ( ( shoe.ShoeCardCount() >= count_high_target ) && ( count_cards ) ) {
 						for ( i=1; i<= count_doubles; i++ ) player_bet.DoubleBet();
 					}
@@ -198,6 +221,8 @@ public class BlackjackSimulator {
 						for ( i=1; i<= count_halves; i++ ) player_bet.HalveBet();
 					}
 
+					/* play the second hand */
+					
 					split_count = game.PlayPlayerHand ( shoe , split_first , split_second , dealer_second , split_bet, split_hand , dealer_has_bj );
 				}
 				catch ( OutOfCards ooc )
@@ -301,6 +326,8 @@ public class BlackjackSimulator {
 					}
 				}   /* end of winner evaluation */
 			}
+			
+			/* if we hit the shuffle point number of cards left, re-shuffle */
 			
 			if (shoe.ShoeCardsLeft() < shuffle_point ) shoe.ShuffleShoe();
 			
