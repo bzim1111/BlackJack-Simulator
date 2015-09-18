@@ -18,7 +18,8 @@ public class BlackjackSimulator {
 		DecimalFormat df = new DecimalFormat("0.0");
 		Bet player_bet, split_bet;
 		Hand player_hand, split_hand;
-		Game game;
+		Player player;
+		Dealer dealer;
 		
 		debug = false;					/* turn on/off debug */
 		
@@ -76,9 +77,10 @@ public class BlackjackSimulator {
 		Shoe shoe = new Shoe ( num_decks );
 		shoe.ShuffleShoe();
 		
-		/* create the game */
+		/* create the Player and Dealer */
 		
-		game = new Game();
+		player = new Player();
+		dealer = new Dealer();
 		
 		/* iterate through the specified number of hand simulations */
 		
@@ -147,7 +149,7 @@ public class BlackjackSimulator {
 
 			/* check if the Player wants to split */
 			
-			split = game.CheckForSplit ( player_first , player_second , dealer_second );
+			split = player.CheckForSplit ( player_first , player_second , dealer_second );
 			
 			/* initialize the split variables */
 			
@@ -219,7 +221,7 @@ public class BlackjackSimulator {
 
 				/* play the hand */
 				
-				player_count = game.PlayPlayerHand ( shoe , player_first , player_second , dealer_second , player_bet, player_hand , dealer_has_bj );
+				player_count = player.PlayPlayerHand ( shoe , player_first , player_second , dealer_second , player_bet, player_hand , dealer_has_bj );
 			}
 			catch ( OutOfCards ooc )
 			{
@@ -249,7 +251,7 @@ public class BlackjackSimulator {
 
 					/* play the second hand */
 					
-					split_count = game.PlayPlayerHand ( shoe , split_first , split_second , dealer_second , split_bet, split_hand , dealer_has_bj );
+					split_count = player.PlayPlayerHand ( shoe , split_first , split_second , dealer_second , split_bet, split_hand , dealer_has_bj );
 				}
 				catch ( OutOfCards ooc )
 				{
@@ -266,7 +268,7 @@ public class BlackjackSimulator {
 			if ( ( player_count <= 21 ) || ( split && (split_count <= 21) ) ) {
 				try
 				{
-					dealer_count = game.PlayDealerHand ( shoe , dealer_first , dealer_second );
+					dealer_count = dealer.PlayDealerHand ( shoe , dealer_first , dealer_second );
 				}
 				catch ( OutOfCards ooc )
 				{
