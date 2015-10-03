@@ -26,7 +26,7 @@ public class BlackjackSimulator {
 		 * Parameters - will be replaced with GUI and XML/JSON
 		 */
 		
-		num_iterations = 100000;	/* number of iterations to simulate */
+		num_iterations = 1000;	/* number of iterations to simulate */
 		shuffle_point  = 20;		/* when this many or fewer cards left in shoe, re-shuffle */
 		num_decks = 8;				/* number of decks in the shoe */
 		
@@ -38,6 +38,11 @@ public class BlackjackSimulator {
 		
 		count_cards = true;			/* turn on/off card counting */
 		
+		/* set up the menu */
+		
+		Menu m = new Menu();
+		m.setup_menu();
+
 		/* initialize some counters */
 		
 		dealer_wins = 0;
@@ -348,5 +353,7 @@ public class BlackjackSimulator {
 		System.out.println("");
 		System.out.println("BANKROLL    "+bankroll);
 		System.out.println("%/HAND      "+df.format(pct_per_hand)+"%");
+		
+		m.display_results ( player_wins, player_pct , dealer_wins , dealer_pct , pushes , bankroll, pct_per_hand );
 	}
 }
