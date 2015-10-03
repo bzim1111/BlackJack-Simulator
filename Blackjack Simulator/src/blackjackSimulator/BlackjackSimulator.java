@@ -26,7 +26,7 @@ public class BlackjackSimulator {
 		 * Parameters - will be replaced with GUI and XML/JSON
 		 */
 		
-		num_iterations = 1000;	/* number of iterations to simulate */
+		num_iterations = 10000;		/* number of iterations to simulate */
 		shuffle_point  = 20;		/* when this many or fewer cards left in shoe, re-shuffle */
 		num_decks = 8;				/* number of decks in the shoe */
 		
@@ -42,7 +42,21 @@ public class BlackjackSimulator {
 		
 		Menu m = new Menu();
 		m.setup_menu();
-
+		
+		/* get parameters entered */
+		
+		Params params = new Params();
+		
+		do {
+			m.process_menu ( params );
+		} while ( ! params.get_run() );
+				
+		m.delete_run();
+		
+		/* copy parameters entered into our variables */
+		
+		num_iterations = params.get_num_iterations();
+		
 		/* initialize some counters */
 		
 		dealer_wins = 0;
