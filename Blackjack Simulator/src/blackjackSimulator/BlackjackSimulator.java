@@ -26,17 +26,17 @@ public class BlackjackSimulator {
 		 * Parameters - will be replaced with GUI and XML/JSON
 		 */
 		
-		num_iterations = 10000;		/* number of iterations to simulate */
-		shuffle_point  = 20;		/* when this many or fewer cards left in shoe, re-shuffle */
-		num_decks = 8;				/* number of decks in the shoe */
+		//num_iterations = 10000;		/* number of iterations to simulate */
+		//shuffle_point  = 20;		/* when this many or fewer cards left in shoe, re-shuffle */
+		//num_decks = 8;				/* number of decks in the shoe */
 		
-		count_high_target = 3;		/* when counting cards, raise bet when this count is hit */
-		count_doubles = 3;			/* number of times to double the bet (e.g. 3 = 8 times the base bet) */
+		///count_high_target = 3;		/* when counting cards, raise bet when this count is hit */
+		//count_doubles = 3;			/* number of times to double the bet (e.g. 3 = 8 times the base bet) */
 		
-		count_low_target = -3;		/* when counting cards, lower bet when this count is hit */
-		count_halves = 3;			/* number of times to halve the bet (e.g. 3 = 1/8 the base bet) */
+		//count_low_target = -3;		/* when counting cards, lower bet when this count is hit */
+		//count_halves = 3;			/* number of times to halve the bet (e.g. 3 = 1/8 the base bet) */
 		
-		count_cards = true;			/* turn on/off card counting */
+		//count_cards = true;			/* turn on/off card counting */
 		
 		/* set up the menu */
 		
@@ -56,6 +56,13 @@ public class BlackjackSimulator {
 		/* copy parameters entered into our variables */
 		
 		num_iterations = params.get_num_iterations();
+		num_decks = params.get_num_decks();
+		shuffle_point = params.get_cut();
+		count_high_target = params.get_high();
+		count_doubles = params.get_high_doubles();
+		count_low_target = params.get_low();
+		count_halves = params.get_low_halves();
+		count_cards = params.get_count_cards();
 		
 		/* initialize some counters */
 		
