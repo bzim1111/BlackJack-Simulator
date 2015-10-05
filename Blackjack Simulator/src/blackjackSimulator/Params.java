@@ -6,9 +6,9 @@ public class Params {
 	int num_decks;
 	int cut_point;
 	int high;
-	int high_doubles;
+	float high_doubles;
 	int low;
-	int low_halves;
+	float low_halves;
 	boolean count_cards;
 	boolean run_flag;
 	
@@ -48,11 +48,11 @@ public class Params {
 		return ( high );
 	}
 
-	public void set_high_doubles ( int n ){
+	public void set_high_doubles ( float n ){
 		high_doubles = n;
 	}
 	
-	public int get_high_doubles() {
+	public float get_high_doubles() {
 		return ( high_doubles );
 	}
 	
@@ -64,11 +64,11 @@ public class Params {
 		return ( low );
 	}
 	
-	public void set_low_halves ( int n ){
+	public void set_low_halves ( float n ){
 		low_halves = n;
 	}
 	
-	public int get_low_halves() {
+	public float get_low_halves() {
 		return ( low_halves );
 	}
 	

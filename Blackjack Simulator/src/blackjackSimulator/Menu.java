@@ -169,7 +169,7 @@ public class Menu extends JFrame {
 		    f.add(high_i);  
 
 		    
-		    highd.insert("High Times to Double Bet", 0);
+		    highd.insert("High Count Bet Multiplier", 0);
 			highd.setBounds(100,210,150,30);    
 			highd.setForeground(Color.black);
 			highd.setVisible(true);
@@ -205,7 +205,7 @@ public class Menu extends JFrame {
 		    low_i.setVisible(true);    
 		    f.add(low_i);  
  
-		    lowh.insert("Low Times to Halve Bet", 0);
+		    lowh.insert("Low Count Bet Divider", 0);
 		    lowh.setBounds(100,270,150,30);    
 		    lowh.setForeground(Color.black);
 		    lowh.setVisible(true);
@@ -369,13 +369,13 @@ public class Menu extends JFrame {
 						params.set_high(Integer.valueOf(high));
 					
 						String highd=highd_i.getText();
-						params.set_high_doubles(Integer.valueOf(highd));
+						params.set_high_doubles(Float.valueOf(highd));
 					
 						String low=low_i.getText();
 						params.set_low(Integer.valueOf(low));
 					
 						String lowh=lowh_i.getText();
-						params.set_low_halves(Integer.valueOf(lowh));
+						params.set_low_halves(Float.valueOf(lowh));
 					}
 				}
 				

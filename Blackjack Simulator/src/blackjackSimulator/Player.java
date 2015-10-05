@@ -171,7 +171,7 @@ public class Player {
 						
 					case "ds":
 						if ( hand.NumCards() == 2 ) {  /* can only double with initial hand */
-							bet.DoubleBet();	
+							bet.DoubleBet( ((float) 2.0) );	
 							try
 							{
 								hand.AddCardToHand ( shoe.ShoeDraw() );
@@ -205,7 +205,7 @@ public class Player {
 						
 					case "dh":
 						if ( hand.NumCards() == 2 ) {  /* can only double with initial hand */
-							bet.DoubleBet();
+							bet.DoubleBet( ((float) 2.0) );
 							all_done = true;  /* after we hit, we are all done since we doubled */
 						}
 						if (debug) System.out.println("player doubles (if possible) and hits");
@@ -223,7 +223,7 @@ public class Player {
 						/* surrender */
 						
 						case "su":
-							if ( ! dealer_bj) bet.HalveBet();   /* can't surrender if dealer has blackjack */
+							if ( ! dealer_bj) bet.HalveBet( ((float) 2.0) );   /* can't surrender if dealer has blackjack */
 							if (debug) System.out.println("player surrenders");
 						all_done = true;
 						surrender = true;
@@ -268,7 +268,7 @@ public class Player {
 						
 					case "ds":
 						if ( hand.NumCards() == 2 ) {   /* can only double with first 2 cards */
-							bet.DoubleBet();
+							bet.DoubleBet( ((float) 2.0));
 							try
 							{
 								hand.AddCardToHand ( shoe.ShoeDraw() );
@@ -302,7 +302,7 @@ public class Player {
 						
 					case "dh":
 						if ( hand.NumCards() == 2 ) {  /* can only double with first 2 cards */
-							bet.DoubleBet();
+							bet.DoubleBet( ((float) 2.0) );
 							all_done = true;  /* we doubled and hit, so we are all done */
 						}
 						if (debug) System.out.println("player doubles (if possible) and hits");
@@ -320,7 +320,7 @@ public class Player {
 					/* surrender */
 						
 					case "su":
-						if ( ! dealer_bj ) bet.HalveBet();  /* can't surrender if dealer has blackjack, assumes "s" if so */
+						if ( ! dealer_bj ) bet.HalveBet( ((float) 2.0) );  /* can't surrender if dealer has blackjack, assumes "s" if so */
 						if (debug) System.out.println("player surrenders");
 						all_done = true;
 						surrender = true;

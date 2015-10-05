@@ -7,7 +7,8 @@ public class BlackjackSimulator {
 	
 	public static void main(String[] args) {
 		
-		int dealer_count , player_count, split_count, count_high_target , count_doubles, count_low_target , count_halves;
+		int dealer_count , player_count, split_count, count_high_target , count_low_target;
+		float count_doubles, count_halves;
 		Card dealer_first , dealer_second , player_first , player_second , split_first , split_second , temp;
 		int i , j;
 		int num_iterations, shuffle_point , num_decks;
@@ -213,10 +214,10 @@ public class BlackjackSimulator {
 				/* process card counting, if enabled */
 				
 				if ( ( shoe.ShoeCardCount() >= count_high_target ) && ( count_cards ) ) {
-					for ( i=1; i<= count_doubles; i++ ) player_bet.DoubleBet();
+					player_bet.DoubleBet( count_doubles );
 				}
 				if ( ( shoe.ShoeCardCount() <= count_low_target ) && ( count_cards ) ) {
-					for ( i=1; i<= count_halves; i++ ) player_bet.HalveBet();
+					player_bet.HalveBet( count_halves );
 				}
 
 				/* play the hand */
@@ -243,10 +244,10 @@ public class BlackjackSimulator {
 					/* handle card counting, if enabled */
 					
 					if ( ( shoe.ShoeCardCount() >= count_high_target ) && ( count_cards ) ) {
-						for ( i=1; i<= count_doubles; i++ ) player_bet.DoubleBet();
+						player_bet.DoubleBet( count_doubles );
 					}
 					if ( ( shoe.ShoeCardCount() <= count_low_target ) && ( count_cards ) ) {
-						for ( i=1; i<= count_halves; i++ ) player_bet.HalveBet();
+						player_bet.HalveBet( count_halves );
 					}
 
 					/* play the second hand */

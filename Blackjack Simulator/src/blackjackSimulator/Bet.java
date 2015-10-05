@@ -17,8 +17,8 @@ public class Bet {
 	 * Double a bet 
 	 */
 	
-	public void DoubleBet() {
-		bet_amount = bet_amount * 2.0;
+	public void DoubleBet ( float times ) {
+		bet_amount = bet_amount * times;
 	}
 	
 	
@@ -26,8 +26,8 @@ public class Bet {
 	 * Halve a bet
 	 */
 	
-	public void HalveBet() {
-		bet_amount = bet_amount / 2.0;
+	public void HalveBet ( float times ) {
+		bet_amount = bet_amount / times;
 	}
 	
 	
