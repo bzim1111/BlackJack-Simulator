@@ -108,7 +108,7 @@ public class Menu extends JFrame {
 		    
 		    /* Cut point */
 		    
-			cut.insert("Cards Left When Cut", 0);
+			cut.insert("Cards Left When Shuffle", 0);
 		    cut.setBounds(100,110,150,30);    
 		    cut.setForeground(Color.black);
 		    cut.setVisible(true);
