@@ -169,7 +169,7 @@ public class Menu extends JFrame {
 		    f.add(high_i);  
 
 		    
-		    highd.insert("High Times to Double", 0);
+		    highd.insert("High Times to Double Bet", 0);
 			highd.setBounds(100,210,150,30);    
 			highd.setForeground(Color.black);
 			highd.setVisible(true);
@@ -205,7 +205,7 @@ public class Menu extends JFrame {
 		    low_i.setVisible(true);    
 		    f.add(low_i);  
  
-		    lowh.insert("Low Times to Halve", 0);
+		    lowh.insert("Low Times to Halve Bet", 0);
 		    lowh.setBounds(100,270,150,30);    
 		    lowh.setForeground(Color.black);
 		    lowh.setVisible(true);
