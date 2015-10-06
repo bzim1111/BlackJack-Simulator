@@ -11,6 +11,7 @@ public class Params {
 	float low_halves;
 	boolean count_cards;
 	boolean run_flag;
+	boolean quit_flag;
 	
 	public Params() {
 		num_iterations = 0;
@@ -88,5 +89,14 @@ public class Params {
 	public boolean get_run() {
 		return ( run_flag );
 	}
+	
+	public void set_quit ( boolean quit ){
+		quit_flag = quit;
+	}
+	
+	public boolean get_quit() {
+		return ( quit_flag );
+	}
+
 
 }

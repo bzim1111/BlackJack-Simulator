@@ -11,6 +11,7 @@ public class Menu extends JFrame {
 	
 		static JFrame f = new JFrame();
 		static JButton run = new JButton("Run");
+		static JButton quit = new JButton("Quit");
 		static JTextArea iter=new JTextArea(150,30);
 		static JTextField iter_i=new JTextField(75);
 		static JTextArea decks=new JTextArea(150,30);
@@ -61,10 +62,14 @@ public class Menu extends JFrame {
 			
 			/* Run / Quit */
 			
-			run.setBounds(250,500,75,40);
+			run.setBounds(150,500,75,40);
 			f.add ( run );
 			run.setVisible(true);
 			
+			quit.setBounds(350,500,75,40);
+			f.add ( quit );
+			quit.setVisible(true);
+
 			/* Number of Iterations */
 			
 			iter.insert("Number of Iterations", 0);
@@ -356,6 +361,7 @@ public class Menu extends JFrame {
 					params.set_num_iterations( Integer.valueOf(iter_input) );
 					
 					params.set_run ( true );
+					params.set_quit (false );
 					
 					String decks_input = decks_i.getText();
 					params.set_num_decks( Integer.valueOf(decks_input) );
@@ -379,6 +385,14 @@ public class Menu extends JFrame {
 					}
 				}
 				
+			} );
+			
+			quit.addActionListener ( new ActionListener() {
+				
+				public void actionPerformed ( ActionEvent ae ) {
+					
+					params.set_quit( true );
+				}		
 			} );
 			
 			r1.addActionListener ( new ActionListener() {
@@ -416,6 +430,21 @@ public class Menu extends JFrame {
 		    f.setLayout(null);  
 		    f.setVisible(true);
 
+		}
+		
+		/*
+		 * Clear the results display
+		 */
+		
+		public void clear_results() {
+			
+			pw_r.setText("");
+			dw_r.setText("");
+			pp_r.setText("");
+			br_r.setText("");
+			pct_r.setText("");
+			f.setLayout(null);
+			f.setVisible(true);
 		}
 		
 		
