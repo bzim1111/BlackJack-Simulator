@@ -40,6 +40,13 @@ public class BlackjackSimulator {
 		
 		//count_cards = true;			/* turn on/off card counting */
 		
+		
+		/* set up the Player and player strategies */
+		
+		player = new Player();
+		player.SetPlayerStrategy();
+		
+		
 		/* set up the menu */
 		
 		Menu m = new Menu();
@@ -51,6 +58,10 @@ public class BlackjackSimulator {
 		
 		do {
 			m.process_menu ( params );
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException ex ){
+			}
 		} while ( (! params.get_run()) && (! params.get_quit()) );
 		if ( params.get_quit() ) System.exit(0);
 		
@@ -84,9 +95,8 @@ public class BlackjackSimulator {
 			Shoe shoe = new Shoe ( num_decks );
 			shoe.ShuffleShoe();
 		
-			/* create the Player and Dealer */
-		
-			player = new Player();
+			/* create the Dealer */
+
 			dealer = new Dealer();
 		
 			/* iterate through the specified number of hand simulations */

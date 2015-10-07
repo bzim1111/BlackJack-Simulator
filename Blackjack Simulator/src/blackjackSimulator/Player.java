@@ -1,5 +1,12 @@
 package blackjackSimulator;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+
 public class Player {
 		
 		/*
@@ -97,6 +104,7 @@ public class Player {
 
 		
 		boolean debug = false;
+		boolean ok_hit, quit_hit;
 		
 		
 		/*
@@ -364,6 +372,167 @@ public class Player {
 			
 			return ( false );
 		}
+						
+			
+		/*
+		 * Set up the Player strategy for hard, soft, and splits.
+		 */
 		
+		public  void SetPlayerStrategy()  {
+			SetHardStrategy();
+		}
+	
 		
+		/*
+		 * Set up the Hard hand strategy.
+		 */
+		
+		public void SetHardStrategy() {
+					
+			JTextArea h=new JTextArea(600,30);
+			JTextArea h_title = new JTextArea(200,30);
+			JTextArea h_header = new JTextArea(200,30);
+			JTextArea v_title = new JTextArea(200,30);
+			JTextArea[] v = new JTextArea[30];
+					
+			JButton ok = new JButton("Ok");
+			JButton quit = new JButton("Quit");
+					
+			String[] options = {"S", "H", "Ds", "Dh", "SP", "SU"};
+					
+			JFrame f = new JFrame();
+			
+					
+			@SuppressWarnings("unchecked")
+			JComboBox<String>[][] c = new JComboBox[30][30];
+					
+			for ( int i=2; i<=21; i++ ) {
+				for ( int j=2; j<=11; j++ ) {
+					c[i][j] = new JComboBox<String>(options);
+				}
+			}
+					
+			for ( int i=2; i<=21; i++ ) {
+				v[i] = new JTextArea(60,60);
+				v[i].setText(Integer.toString(i));
+				v[i].setBounds(40,45+30*(i-2),60,60);
+				v[i].setVisible(true);
+				v[i].setEditable(false);
+				v[i].setOpaque(false);;
+				v[i].setForeground(Color.black);
+			    v[i].setAlignmentX(JComponent.LEFT_ALIGNMENT);
+			    v[i].setAlignmentY(JComponent.CENTER_ALIGNMENT);
+			    f.add(v[i]);
+			}
+								  
+			f.setTitle("BlackJack Simulator Configuration");
+			f.setSize(800,700); 
+			f.setLayout(null);
+			f.setLocationRelativeTo(null); 
+			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				
+			h_header.setText("HARD HAND CONFIGURATION");
+			h_header.setBounds(340,5,200,30);    
+			h_header.setForeground(Color.black);
+			h_header.setVisible(true);
+			h_header.setEditable(false);
+			h_header.setOpaque(false);
+			h_header.setAlignmentX(JComponent.LEFT_ALIGNMENT);
+			h_header.setAlignmentY(JComponent.CENTER_ALIGNMENT);
+			f.add(h_header);
+			
+			h_title.setText("Dealer Up Card");
+			h_title.setBounds(340,15,200,30);    
+			h_title.setForeground(Color.black);
+			h_title.setVisible(true);
+			h_title.setEditable(false);
+			h_title.setOpaque(false);
+			h_title.setAlignmentX(JComponent.LEFT_ALIGNMENT);
+			h_title.setAlignmentY(JComponent.CENTER_ALIGNMENT);
+			f.add(h_title);
+				    
+			v_title.setText("Player Count");
+			v_title.setBounds(5,25,200,30);    
+			v_title.setForeground(Color.black);
+			v_title.setVisible(true);
+			v_title.setEditable(false);
+			v_title.setOpaque(false);
+			v_title.setAlignmentX(JComponent.LEFT_ALIGNMENT);
+			v_title.setAlignmentY(JComponent.CENTER_ALIGNMENT);
+			f.add(v_title);
+
+			h.setText("");
+			h.insert("                                   2                 3                  4                  5                  6                  7                  8                  9                10               11", 0);
+			h.setBounds(0,20,800,30);    
+			h.setForeground(Color.black);
+			h.setVisible(true);
+			h.setEditable(false);
+			h.setOpaque(false);
+			h.setAlignmentX(JComponent.LEFT_ALIGNMENT);
+			h.setAlignmentY(JComponent.CENTER_ALIGNMENT);
+			f.add(h);
+				    
+			for ( int i=2; i<=21; i++ ) {
+				for ( int j=2; j<=11; j++ ) {
+				    c[i][j].setBounds(90+(60*(j-2)),40+(30*(i-2)),40,25);
+					c[i][j].setVisible(true);
+					c[i][j].setFont( new Font("Arial", Font.PLAIN, 10 ));
+					f.add(c[i][j]);
+				 }
+			}
+				    
+			c[3][3].setSelectedIndex(2);
+				    
+			/* Run / Quit */
+					
+			ok.setBounds(700,300,75,40);
+			ok.setVisible(true);
+			f.add ( ok );
+			quit.setBounds(700,400,75,40);
+			quit.setVisible(true);
+			f.add ( quit );
+				    
+			f.setVisible(true);
+				
+			/* Listener for "ok" button */
+				
+			ok_hit = false;
+			
+			ok.addActionListener ( new ActionListener() {
+						
+				public void actionPerformed ( ActionEvent ae ) {		
+					ok_hit = true;
+					System.out.println("ok hit");
+				}
+						
+			} );
+				    
+			/* Listener for "quit" button */
+				   
+			quit_hit = false;
+			
+			quit.addActionListener ( new ActionListener() {
+						
+				public void actionPerformed ( ActionEvent ae ) {
+					quit_hit = true;
+					System.out.println("quit hit");
+				}
+						
+			} );
+			
+			do {
+				//do nothing
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException ex ){
+				}
+			} while ( (! ok_hit) && (! quit_hit) );
+			
+			f.setVisible(false);
+			
+			if ( quit_hit ) System.exit(0);
+			
+		}
+
 	}
+
