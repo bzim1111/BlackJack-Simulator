@@ -24,22 +24,6 @@ public class BlackjackSimulator {
 		
 		debug = false;					/* turn on/off debug */
 		
-		/*
-		 * Parameters - will be replaced with GUI and XML/JSON
-		 */
-		
-		//num_iterations = 10000;		/* number of iterations to simulate */
-		//shuffle_point  = 20;			/* when this many or fewer cards left in shoe, re-shuffle */
-		//num_decks = 8;				/* number of decks in the shoe */
-		
-		///count_high_target = 3;		/* when counting cards, raise bet when this count is hit */
-		//count_doubles = 3;			/* number of times to double the bet (e.g. 3 = 8 times the base bet) */
-		
-		//count_low_target = -3;		/* when counting cards, lower bet when this count is hit */
-		//count_halves = 3;				/* number of times to halve the bet (e.g. 3 = 1/8 the base bet) */
-		
-		//count_cards = true;			/* turn on/off card counting */
-		
 		
 		/* set up the Player and player strategies */
 		
@@ -65,10 +49,9 @@ public class BlackjackSimulator {
 		} while ( (! params.get_run()) && (! params.get_quit()) );
 		if ( params.get_quit() ) System.exit(0);
 		
-				
+		/* loop as long as run is selected */
+		
 		while ( ( ! params.get_quit()) && ( params.get_run() ) ) {
-			
-			//m.delete_run();
 			
 			m.clear_results();
 		

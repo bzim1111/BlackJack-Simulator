@@ -538,6 +538,30 @@ public class Player {
 						
 				public void actionPerformed ( ActionEvent ae ) {		
 					ok_hit = true;
+					for ( int i=2; i<=21; i++ ) {
+						for ( int j=2; j<=11; j++ ) {
+							switch (c[i][j].getSelectedItem().toString()) {
+								case "S":
+									player_hard[i-2][j-2] = "s";
+									break;
+								case "H":
+									player_hard[i-2][j-2] = "h";
+									break;
+								case "Ds":
+									player_hard[i-2][j-2] = "ds";
+									break;
+								case "Dh":
+									player_hard[i-2][j-2] = "dh";
+									break;
+								case "SP":
+									player_hard[i-2][j-2] = "sp";
+									break;
+								case "SU":
+									player_hard[i-2][j-2] = "su";
+									break;
+							}
+						}
+					}
 				}
 						
 			} );
@@ -728,6 +752,31 @@ public class Player {
 						
 				public void actionPerformed ( ActionEvent ae ) {		
 					ok_hit = true;
+					for ( int i=3; i<=10; i++ ) {
+						for ( int j=2; j<=11; j++ ) {
+							switch (c[i][j].getSelectedItem().toString()) {
+								case "S":
+									player_soft[i-2][j-2] = "s";
+									break;
+								case "H":
+									player_soft[i-2][j-2] = "h";
+									break;
+								case "Ds":
+									player_soft[i-2][j-2] = "ds";
+									break;
+								case "Dh":
+									player_soft[i-2][j-2] = "dh";
+									break;
+								case "SP":
+									player_soft[i-2][j-2] = "sp";
+									break;
+								case "SU":
+									player_soft[i-2][j-2] = "su";
+									break;
+							}
+						}
+					}
+
 				}
 						
 			} );
@@ -918,6 +967,31 @@ public class Player {
 						
 				public void actionPerformed ( ActionEvent ae ) {		
 					ok_hit = true;
+					for ( int i=2; i<=11; i++ ) {
+						for ( int j=2; j<=11; j++ ) {
+							switch (c[i][j].getSelectedItem().toString()) {
+								case "S":
+									player_pair[i-2][j-2] = "s";
+									break;
+								case "H":
+									player_pair[i-2][j-2] = "h";
+									break;
+								case "Ds":
+									player_pair[i-2][j-2] = "ds";
+									break;
+								case "Dh":
+									player_pair[i-2][j-2] = "dh";
+									break;
+								case "SP":
+									player_pair[i-2][j-2] = "sp";
+									break;
+								case "SU":
+									player_pair[i-2][j-2] = "su";
+									break;
+							}
+						}
+					}
+
 				}
 						
 			} );
