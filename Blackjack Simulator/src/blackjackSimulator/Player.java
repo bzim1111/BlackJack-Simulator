@@ -406,16 +406,20 @@ public class Player {
 			@SuppressWarnings("unchecked")
 			JComboBox<String>[][] c = new JComboBox[30][30];
 					
+			/* set up pull downs for each parameter */
+			
 			for ( int i=2; i<=21; i++ ) {
 				for ( int j=2; j<=11; j++ ) {
 					c[i][j] = new JComboBox<String>(options);
 				}
 			}
-					
+			
+			/* set up the vertical labels */
+			
 			for ( int i=2; i<=21; i++ ) {
 				v[i] = new JTextArea(60,60);
 				v[i].setText(Integer.toString(i));
-				v[i].setBounds(40,45+30*(i-2),60,60);
+				v[i].setBounds(40,65+30*(i-2),60,60);
 				v[i].setVisible(true);
 				v[i].setEditable(false);
 				v[i].setOpaque(false);;
@@ -424,7 +428,9 @@ public class Player {
 			    v[i].setAlignmentY(JComponent.CENTER_ALIGNMENT);
 			    f.add(v[i]);
 			}
-								  
+			
+			/* set up the titles */
+			
 			f.setTitle("BlackJack Simulator Configuration");
 			f.setSize(800,700); 
 			f.setLayout(null);
@@ -432,7 +438,7 @@ public class Player {
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				
 			h_header.setText("HARD HAND CONFIGURATION");
-			h_header.setBounds(340,5,200,30);    
+			h_header.setBounds(300,5,200,30);    
 			h_header.setForeground(Color.black);
 			h_header.setVisible(true);
 			h_header.setEditable(false);
@@ -442,7 +448,7 @@ public class Player {
 			f.add(h_header);
 			
 			h_title.setText("Dealer Up Card");
-			h_title.setBounds(340,15,200,30);    
+			h_title.setBounds(340,20,200,30);    
 			h_title.setForeground(Color.black);
 			h_title.setVisible(true);
 			h_title.setEditable(false);
@@ -452,7 +458,7 @@ public class Player {
 			f.add(h_title);
 				    
 			v_title.setText("Player Count");
-			v_title.setBounds(5,25,200,30);    
+			v_title.setBounds(5,45,200,30);    
 			v_title.setForeground(Color.black);
 			v_title.setVisible(true);
 			v_title.setEditable(false);
@@ -461,9 +467,11 @@ public class Player {
 			v_title.setAlignmentY(JComponent.CENTER_ALIGNMENT);
 			f.add(v_title);
 
+			/* set up the horizontal labels */
+			
 			h.setText("");
 			h.insert("                                   2                 3                  4                  5                  6                  7                  8                  9                10               11", 0);
-			h.setBounds(0,20,800,30);    
+			h.setBounds(0,40,800,30);    
 			h.setForeground(Color.black);
 			h.setVisible(true);
 			h.setEditable(false);
@@ -471,19 +479,45 @@ public class Player {
 			h.setAlignmentX(JComponent.LEFT_ALIGNMENT);
 			h.setAlignmentY(JComponent.CENTER_ALIGNMENT);
 			f.add(h);
-				    
+			
+			/* set up the drop down boxes */
+			
 			for ( int i=2; i<=21; i++ ) {
+				
 				for ( int j=2; j<=11; j++ ) {
-				    c[i][j].setBounds(90+(60*(j-2)),40+(30*(i-2)),40,25);
+				    c[i][j].setBounds(90+(60*(j-2)),60+(30*(i-2)),40,25);
 					c[i][j].setVisible(true);
 					c[i][j].setFont( new Font("Arial", Font.PLAIN, 10 ));
+			
+					/* set defaults based on the optimal strategy matrix defined above */
+					
+					switch ( player_hard[i-2][j-2] ) {
+						case "s":
+							c[i][j].setSelectedIndex(0);
+							break;
+						case "h":
+							c[i][j].setSelectedIndex(1);
+							break;
+						case "ds":
+							c[i][j].setSelectedIndex(2);
+							break;
+						case "dh":
+							c[i][j].setSelectedIndex(3);
+							break;
+						case "sp":
+							c[i][j].setSelectedIndex(4);
+							break;
+						case "su":
+							c[i][j].setSelectedIndex(5);
+					}
+					
+					/* add the drop down to the frame */
+					
 					f.add(c[i][j]);
 				 }
 			}
 				    
-			c[3][3].setSelectedIndex(2);
-				    
-			/* Run / Quit */
+			/* Add Ok / Quit buttons */
 					
 			ok.setBounds(700,300,75,40);
 			ok.setVisible(true);
@@ -520,6 +554,8 @@ public class Player {
 						
 			} );
 			
+			/* wait until ok or quit is hit */
+			
 			do {
 				//do nothing
 				try {
@@ -528,7 +564,11 @@ public class Player {
 				}
 			} while ( (! ok_hit) && (! quit_hit) );
 			
+			/* erase the frame */
+			
 			f.setVisible(false);
+			
+			/* if quit, exit */
 			
 			if ( quit_hit ) System.exit(0);
 			
