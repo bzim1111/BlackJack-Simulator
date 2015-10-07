@@ -106,6 +106,10 @@ public class Player {
 		boolean debug = false;
 		boolean ok_hit, quit_hit;
 		
+		@SuppressWarnings("unchecked")
+		JComboBox<String>[][] c = new JComboBox[30][30];
+
+		
 		
 		/*
 		 * Constructor 
@@ -405,8 +409,8 @@ public class Player {
 			JFrame f = new JFrame();
 			
 					
-			@SuppressWarnings("unchecked")
-			JComboBox<String>[][] c = new JComboBox[30][30];
+			//@SuppressWarnings("unchecked")
+			//JComboBox<String>[][] c = new JComboBox[30][30];
 					
 			/* set up pull downs for each parameter */
 			
@@ -619,8 +623,8 @@ public class Player {
 			JFrame f = new JFrame();
 			
 					
-			@SuppressWarnings("unchecked")
-			JComboBox<String>[][] c = new JComboBox[30][30];
+			//@SuppressWarnings("unchecked")
+			//JComboBox<String>[][] c = new JComboBox[30][30];
 					
 			/* set up pull downs for each parameter */
 			
@@ -834,8 +838,8 @@ public class Player {
 			JFrame f = new JFrame();
 			
 					
-			@SuppressWarnings("unchecked")
-			JComboBox<String>[][] c = new JComboBox[30][30];
+			//@SuppressWarnings("unchecked")
+			//JComboBox<String>[][] c = new JComboBox[30][30];
 					
 			/* set up pull downs for each parameter */
 			
