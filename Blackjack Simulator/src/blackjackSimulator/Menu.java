@@ -80,6 +80,7 @@ public class Menu extends JFrame {
 		    iter.setOpaque(false);
 		    iter.setAlignmentX(LEFT_ALIGNMENT);
 		    iter.setAlignmentY(CENTER_ALIGNMENT);
+		    iter.setToolTipText("Enter the number of iterations for the simulation run");
 		    f.add(iter);
 		    
 		    iter_i.setBounds(300,50,100,20);  
@@ -87,6 +88,7 @@ public class Menu extends JFrame {
 		    iter_i.setForeground(Color.black);
 		    iter_i.setAlignmentY(CENTER_ALIGNMENT);
 		    /*iter_i.setBorder(BorderFactory.createLineBorder(Color.black));*/
+		    iter_i.setToolTipText("Enter the number of iterations for the simulation run");
 		    iter_i.setVisible(true);    
 		    f.add(iter_i);  
 		    
@@ -100,6 +102,7 @@ public class Menu extends JFrame {
 		    decks.setOpaque(false);
 		    decks.setAlignmentX(LEFT_ALIGNMENT);
 		    decks.setAlignmentY(CENTER_ALIGNMENT);
+		    decks.setToolTipText("Enter the number of decks in the shoe, from 1-8");
 		    f.add(decks);
 		    
 		    decks_i.setBounds(300,80,50,20);  
@@ -107,6 +110,7 @@ public class Menu extends JFrame {
 		    decks_i.setForeground(Color.black);
 		    decks_i.setAlignmentY(CENTER_ALIGNMENT);
 		    /*iter_i.setBorder(BorderFactory.createLineBorder(Color.black));*/
+		    decks_i.setToolTipText("Enter the number of decks in the shoe, from 1-8");
 		    decks_i.setVisible(true);    
 		    f.add(decks_i);  
 	    
@@ -121,12 +125,14 @@ public class Menu extends JFrame {
 		    cut.setOpaque(false);
 		    cut.setAlignmentX(LEFT_ALIGNMENT);
 		    cut.setAlignmentY(CENTER_ALIGNMENT);
+		    cut.setToolTipText("Enter the number of cards left in the shoe for the shoe to be shuffled");
 		    f.add(cut);
 		    
 		    cut_i.setBounds(300,110,50,20);  
 		    cut_i.setBackground(Color.white);  
 		    cut_i.setForeground(Color.black);
 		    cut_i.setAlignmentY(CENTER_ALIGNMENT);
+		    cut_i.setToolTipText("Enter the number of cards left in the shoe for the shoe to be shuffled");
 		    /*iter_i.setBorder(BorderFactory.createLineBorder(Color.black));*/
 		    cut_i.setVisible(true);    
 		    f.add(cut_i);  
@@ -135,6 +141,8 @@ public class Menu extends JFrame {
 		    
 		    r1.setBounds(300,140,75,30);
 		    r2.setBounds(375,140,75,30);
+		    r1.setToolTipText("Turn card counting on or off");
+		    r2.setToolTipText("Turn card counting on or off");
 		    
 		    bg.add(r1);
 		    bg.add(r2);
@@ -151,6 +159,7 @@ public class Menu extends JFrame {
 		    cc.setOpaque(false);
 		    cc.setAlignmentX(LEFT_ALIGNMENT);
 		    cc.setAlignmentY(CENTER_ALIGNMENT);
+		    cc.setToolTipText("Turn card counting on or off");
 		    f.add(cc);
 		    
 		    /* Card Counting Parameters */
@@ -163,12 +172,14 @@ public class Menu extends JFrame {
 			high.setOpaque(false);
 			high.setAlignmentX(LEFT_ALIGNMENT);
 			high.setAlignmentY(CENTER_ALIGNMENT);
+			high.setToolTipText("Enter the count when bet should be multiplied");
 		    f.add(high);
 		    
 		    high_i.setBounds(300,180,50,20);  
 		    high_i.setBackground(Color.white);  
 		    high_i.setForeground(Color.black);
 		    high_i.setAlignmentY(CENTER_ALIGNMENT);
+		    high_i.setToolTipText("Enter the count when bet should be multiplied");
 		    /*iter_i.setBorder(BorderFactory.createLineBorder(Color.black));*/
 		    high_i.setVisible(true);    
 		    f.add(high_i);  
@@ -182,12 +193,14 @@ public class Menu extends JFrame {
 			highd.setOpaque(false);
 			highd.setAlignmentX(LEFT_ALIGNMENT);
 			highd.setAlignmentY(CENTER_ALIGNMENT);
+			highd.setToolTipText("Enter the bet multiplier when the high count target is hit");
 		    f.add(highd);
 		    
 		    highd_i.setBounds(300,210,50,20);  
 		    highd_i.setBackground(Color.white);  
 		    highd_i.setForeground(Color.black);
 		    highd_i.setAlignmentY(CENTER_ALIGNMENT);
+		    highd_i.setToolTipText("Enter the bet multiplier when the high count target is hit");
 		    /*iter_i.setBorder(BorderFactory.createLineBorder(Color.black));*/
 		    highd_i.setVisible(true);    
 		    f.add(highd_i);  
@@ -200,12 +213,14 @@ public class Menu extends JFrame {
 		    low.setOpaque(false);
 		    low.setAlignmentX(LEFT_ALIGNMENT);
 		    low.setAlignmentY(CENTER_ALIGNMENT);
+		    low.setToolTipText("Enter the count when the bet should be divided");
 		    f.add(low);
 		    
 		    low_i.setBounds(300,240,50,20);  
 		    low_i.setBackground(Color.white);  
 		    low_i.setForeground(Color.black);
 		    low_i.setAlignmentY(CENTER_ALIGNMENT);
+		    low_i.setToolTipText("Enter the count when the bet should be divided");
 		    /*iter_i.setBorder(BorderFactory.createLineBorder(Color.black));*/
 		    low_i.setVisible(true);    
 		    f.add(low_i);  
@@ -218,12 +233,14 @@ public class Menu extends JFrame {
 		    lowh.setOpaque(false);
 		    lowh.setAlignmentX(LEFT_ALIGNMENT);
 		    lowh.setAlignmentY(CENTER_ALIGNMENT);
+		    lowh.setToolTipText("Enter the bet divisor when the low count target is hit");
 		    f.add(lowh);
 		    
 		    lowh_i.setBounds(300,270,50,20);  
 		    lowh_i.setBackground(Color.white);  
 		    lowh_i.setForeground(Color.black);
 		    lowh_i.setAlignmentY(CENTER_ALIGNMENT);
+		    lowh_i.setToolTipText("Enter the bet divisor when the low count target is hit");
 		    /*iter_i.setBorder(BorderFactory.createLineBorder(Color.black));*/
 		    lowh_i.setVisible(true);    
 		    f.add(lowh_i);  
@@ -249,6 +266,7 @@ public class Menu extends JFrame {
 		    pw.setOpaque(false);
 		    pw.setAlignmentX(LEFT_ALIGNMENT);
 		    pw.setAlignmentY(CENTER_ALIGNMENT);
+		    pw.setToolTipText("Number of times the player won the hand");
 		    f.add(pw);
 		    
 			dw.insert("Dealer Wins", 0);
@@ -259,6 +277,7 @@ public class Menu extends JFrame {
 		    dw.setOpaque(false);
 		    dw.setAlignmentX(LEFT_ALIGNMENT);
 		    dw.setAlignmentY(CENTER_ALIGNMENT);
+		    dw.setToolTipText("Number of times the dealer won the hand");
 		    f.add(dw);
 		    
 			pp.insert("Pushes", 0);
@@ -269,6 +288,7 @@ public class Menu extends JFrame {
 		    pp.setOpaque(false);
 		    pp.setAlignmentX(LEFT_ALIGNMENT);
 		    pp.setAlignmentY(CENTER_ALIGNMENT);
+		    pp.setToolTipText("Number of times the hand was tied");
 		    f.add(pp);
 		    
 			br.insert("Ending Bankroll", 0);
@@ -279,6 +299,7 @@ public class Menu extends JFrame {
 			br.setOpaque(false);
 			br.setAlignmentX(LEFT_ALIGNMENT);
 			br.setAlignmentY(CENTER_ALIGNMENT);
+			br.setToolTipText("Ending bankroll betting one unit per hand");
 			f.add(br);
 			
 			pct.insert("% per Hand", 0);
@@ -289,6 +310,7 @@ public class Menu extends JFrame {
 			pct.setOpaque(false);
 			pct.setAlignmentX(LEFT_ALIGNMENT);
 			pct.setAlignmentY(CENTER_ALIGNMENT);
+			pct.setToolTipText("Percent won/lost per hand");
 			f.add(pct);
 
 		    pw_r.setBounds(300,350,150,30);    

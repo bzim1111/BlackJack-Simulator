@@ -494,6 +494,7 @@ public class Player {
 				    c[i][j].setBounds(90+(60*(j-2)),60+(30*(i-2)),40,25);
 					c[i][j].setVisible(true);
 					c[i][j].setFont( new Font("Arial", Font.PLAIN, 10 ));
+					c[i][j].setToolTipText("S=Stay, H=Hit, Ds=Double if possible, else Stay, Dh=Double if possible, else Hit, SP=Split, SU=Surrender");
 			
 					/* set defaults based on the optimal strategy matrix defined above */
 					
@@ -708,6 +709,7 @@ public class Player {
 				    c[i][j].setBounds(90+(60*(j-2)),60+(30*(i-3)),40,25);
 					c[i][j].setVisible(true);
 					c[i][j].setFont( new Font("Arial", Font.PLAIN, 10 ));
+					c[i][j].setToolTipText("S=Stay, H=Hit, Ds=Double if possible, else Stay, Dh=Double if possible, else Hit, SP=Split, SU=Surrender");
 			
 					/* set defaults based on the optimal strategy matrix defined above */
 					
@@ -923,6 +925,7 @@ public class Player {
 				    c[i][j].setBounds(90+(60*(j-2)),60+(30*(i-2)),40,25);
 					c[i][j].setVisible(true);
 					c[i][j].setFont( new Font("Arial", Font.PLAIN, 10 ));
+					c[i][j].setToolTipText("S=Stay, H=Hit, Ds=Double if possible, else Stay, Dh=Double if possible, else Hit, SP=Split, SU=Surrender");
 			
 					/* set defaults based on the optimal strategy matrix defined above */
 					
