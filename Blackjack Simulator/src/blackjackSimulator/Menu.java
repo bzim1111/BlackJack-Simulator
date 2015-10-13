@@ -508,6 +508,10 @@ public class Menu extends JFrame {
 			public boolean verify (JComponent input ) {
 				JTextField tf = (JTextField) input;
 				String text = tf.getText();
+				if ( tf.getText().isEmpty() ) {
+					JOptionPane.showMessageDialog( f , "Please enter a value between 1 and 8" );
+					return false;
+				}
 				if (( Integer.parseInt(text) <= 8 ) && ( Integer.parseInt(text) >= 1 )) return true;
 				JOptionPane.showMessageDialog( f , "Please enter a value between 1 and 8" );
 				return false;
@@ -516,15 +520,40 @@ public class Menu extends JFrame {
 		
 		
 		/*
-		 * Verify that the cut point is at least 15 
+		 * Verify that the cut point is between 15 and (total number of cards - 15)
 		 */
 		
 		class cut_verifier extends InputVerifier {
 			public boolean verify (JComponent input ) {
+				
+				/* make sure number of decks entered first */
+				
+				if ( decks_i.getText().isEmpty() ) {
+					JOptionPane.showMessageDialog(f, "Please enter number of decks first");
+					decks_i.requestFocus();
+					return false;
+				}
+				
+				/* get the high bound on the cut point */
+				
+				int decks = Integer.parseInt(decks_i.getText());
+				int high_bound = (decks*52) - 15;
+				
+				/* check that entry is between 15 and high bound */
+				
+				String message = "Please enter a value between 15 and "+high_bound;
+				
 				JTextField tf = (JTextField) input;
+				if ( tf.getText().isEmpty() ) {
+					JOptionPane.showMessageDialog( f , message );
+					return false;
+				}
+				
 				String text = tf.getText();
-				if ( Integer.parseInt(text) >= 15 ) return true;
-				JOptionPane.showMessageDialog( f , "Please enter a value of at least 15" );
+				
+				if (( Integer.parseInt(text) >= 15 ) && ( Integer.parseInt(text) <= high_bound )) return true;
+				
+				JOptionPane.showMessageDialog( f , message );
 				return false;
 			}
 		}

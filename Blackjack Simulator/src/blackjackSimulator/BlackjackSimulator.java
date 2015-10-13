@@ -371,6 +371,7 @@ public class BlackjackSimulator {
 		
 			/* print statistics */
 		
+			/*
 			System.out.println("");
 			System.out.println("PLAYER WINS "+player_wins+" "+df.format(player_pct)+"%");
 			System.out.println("DEALER WINS "+dealer_wins+" "+df.format(dealer_pct)+"%");
@@ -378,6 +379,7 @@ public class BlackjackSimulator {
 			System.out.println("");
 			System.out.println("BANKROLL    "+df.format(bankroll));
 			System.out.println("%/HAND      "+df.format(pct_per_hand)+"%");
+			*/
 		
 			/* display statistics */
 		
