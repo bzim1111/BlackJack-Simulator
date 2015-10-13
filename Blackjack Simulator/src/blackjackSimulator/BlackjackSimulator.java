@@ -38,15 +38,17 @@ public class BlackjackSimulator {
 		
 		/* get parameters entered */
 		
+		boolean correct = false;
+		
 		Params params = new Params();
 		
 		do {
-			m.process_menu ( params );
+			correct = m.process_menu ( params );
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException ex ){
 			}
-		} while ( (! params.get_run()) && (! params.get_quit()) );
+		} while ( ((! params.get_run()) && (! params.get_quit())) || ( ! correct ));
 		if ( params.get_quit() ) System.exit(0);
 		
 		/* loop as long as run is selected */
@@ -381,10 +383,11 @@ public class BlackjackSimulator {
 		
 			m.display_results ( player_wins, player_pct , dealer_wins , dealer_pct , pushes , bankroll, pct_per_hand );
 		
+			correct = false;
 			params.set_run( false );
 			do {
-				m.process_menu ( params );
-			} while ( (! params.get_run()) && (! params.get_quit()) );
+				correct = m.process_menu ( params );
+			} while ( ((! params.get_run()) && (! params.get_quit())) || ( ! correct ) );
 			if ( params.get_quit() ) System.exit(0);
 			
 		}

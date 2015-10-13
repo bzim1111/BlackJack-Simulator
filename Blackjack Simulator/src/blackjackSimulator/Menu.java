@@ -47,6 +47,8 @@ public class Menu extends JFrame {
 		
 		DecimalFormat df = new DecimalFormat("0.0");
 		
+		boolean return_value = true;
+		
 		
 		/*
 		 * Set up the menu.
@@ -89,7 +91,8 @@ public class Menu extends JFrame {
 		    iter_i.setAlignmentY(CENTER_ALIGNMENT);
 		    /*iter_i.setBorder(BorderFactory.createLineBorder(Color.black));*/
 		    iter_i.setToolTipText("Enter the number of iterations for the simulation run");
-		    iter_i.setVisible(true);    
+		    iter_i.setVisible(true);  
+
 		    f.add(iter_i);  
 		    
 		    /* Number of decks */
@@ -373,7 +376,19 @@ public class Menu extends JFrame {
 		 * Get parameters and return them
 		 */
 		
-		public void process_menu ( final Params params ) {
+		public boolean process_menu ( final Params params ) {
+			
+			return_value = true;
+			
+			/* set up verifier for number of decks */
+			
+			decks_i.setInputVerifier( new decks_verifier() );
+			
+			/* set up verifier for cards left when shuffle */
+			
+			cut_i.setInputVerifier ( new cut_verifier() );
+			
+			/* set up listener for run button */
 			
 			run.addActionListener ( new ActionListener() {
 				
@@ -387,7 +402,7 @@ public class Menu extends JFrame {
 					
 					String decks_input = decks_i.getText();
 					params.set_num_decks( Integer.valueOf(decks_input) );
-					
+				
 					String cutp = cut_i.getText();
 					params.set_cut( Integer.valueOf(cutp));
 					
@@ -409,6 +424,8 @@ public class Menu extends JFrame {
 				
 			} );
 			
+			/* set up listener for quit button */
+			
 			quit.addActionListener ( new ActionListener() {
 				
 				public void actionPerformed ( ActionEvent ae ) {
@@ -416,6 +433,8 @@ public class Menu extends JFrame {
 					params.set_quit( true );
 				}		
 			} );
+			
+			/* set up listener for card counting = on */
 			
 			r1.addActionListener ( new ActionListener() {
 				
@@ -425,14 +444,16 @@ public class Menu extends JFrame {
 			} );
 			
 			
+			/* set up listener for card counting = off */
+			
 			r2.addActionListener ( new ActionListener() {
 				
 				public void actionPerformed ( ActionEvent ae ) {
 					params.set_count_cards(false);
 				}
 			} );
-
-							
+			
+			return ( return_value );
 		}
 		
 		
@@ -477,5 +498,38 @@ public class Menu extends JFrame {
 		public void delete_run () {
 			run.setVisible(false);
 		}
-		  
-	}  // end class
+		
+		
+		/*
+		 * Verify that the number of decks is between 1 and 8 
+		 */
+		
+		class decks_verifier extends InputVerifier {
+			public boolean verify (JComponent input ) {
+				JTextField tf = (JTextField) input;
+				String text = tf.getText();
+				if (( Integer.parseInt(text) <= 8 ) && ( Integer.parseInt(text) >= 1 )) return true;
+				JOptionPane.showMessageDialog( f , "Please enter a value between 1 and 8" );
+				return false;
+			}
+		}
+		
+		
+		/*
+		 * Verify that the cut point is at least 15 
+		 */
+		
+		class cut_verifier extends InputVerifier {
+			public boolean verify (JComponent input ) {
+				JTextField tf = (JTextField) input;
+				String text = tf.getText();
+				if ( Integer.parseInt(text) >= 15 ) return true;
+				JOptionPane.showMessageDialog( f , "Please enter a value of at least 15" );
+				return false;
+			}
+		}
+
+		
+} // end class
+
+
